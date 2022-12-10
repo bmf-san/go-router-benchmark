@@ -398,3 +398,40 @@ func BenchmarkPathParamColonRoutes10Denco(b *testing.B) {
 	router := loadDenco(pathParamColonRoutes10)
 	benchmark(b, pathParamColonRoutes10, router)
 }
+
+// labstack/echo
+// https://github.com/labstack/echo
+func BenchmarkStaticRoutesRootEcho(b *testing.B) {
+	router := loadEcho(staticRoutesRoot)
+	benchmark(b, staticRoutesRoot, router)
+}
+
+func BenchmarkStaticRoutes1Echo(b *testing.B) {
+	router := loadEcho(staticRoutes1)
+	benchmark(b, staticRoutes1, router)
+}
+
+func BenchmarkStaticRoutes5Echo(b *testing.B) {
+	router := loadEcho(staticRoutes5)
+	benchmark(b, staticRoutes5, router)
+}
+
+func BenchmarkStaticRoutes10Echo(b *testing.B) {
+	router := loadEcho(staticRoutes10)
+	benchmark(b, staticRoutes10, router)
+}
+
+func BenchmarkPathParamColonRoutes1Echo(b *testing.B) {
+	router := loadEcho(pathParamColonRoutes1)
+	benchmark(b, pathParamColonRoutes1, router)
+}
+
+func BenchmarkPathParamColonRoutes5Echo(b *testing.B) {
+	router := loadEcho(pathParamColonRoutes5)
+	benchmark(b, pathParamColonRoutes5, router)
+}
+
+func BenchmarkPathParamColonRoutes10Echo(b *testing.B) {
+	router := loadEcho(pathParamColonRoutes10)
+	benchmark(b, pathParamColonRoutes10, router)
+}
