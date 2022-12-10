@@ -324,3 +324,40 @@ func BenchmarkPathParamBracketRoutes10GorillaMux(b *testing.B) {
 	router := loadGorillaMux(pathParamBracketRoutes10)
 	benchmark(b, pathParamBracketRoutes10, router)
 }
+
+// nissy/bon
+// https://github.com/nissy/bon
+func BenchmarkStaticRoutesRootBon(b *testing.B) {
+	router := loadBon(staticRoutesRoot)
+	benchmark(b, staticRoutesRoot, router)
+}
+
+func BenchmarkStaticRoutes1Bon(b *testing.B) {
+	router := loadBon(staticRoutes1)
+	benchmark(b, staticRoutes1, router)
+}
+
+func BenchmarkStaticRoutes5Bon(b *testing.B) {
+	router := loadBon(staticRoutes5)
+	benchmark(b, staticRoutes5, router)
+}
+
+func BenchmarkStaticRoutes10Bon(b *testing.B) {
+	router := loadBon(staticRoutes10)
+	benchmark(b, staticRoutes10, router)
+}
+
+func BenchmarkPathParamColonRoutes1Bon(b *testing.B) {
+	router := loadBon(pathParamColonRoutes1)
+	benchmark(b, pathParamColonRoutes1, router)
+}
+
+func BenchmarkPathParamColonRoutes5Bon(b *testing.B) {
+	router := loadBon(pathParamColonRoutes5)
+	benchmark(b, pathParamColonRoutes5, router)
+}
+
+func BenchmarkPathParamColonRoutes10Bon(b *testing.B) {
+	router := loadBon(pathParamColonRoutes10)
+	benchmark(b, pathParamColonRoutes10, router)
+}
