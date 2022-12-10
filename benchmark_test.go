@@ -361,3 +361,40 @@ func BenchmarkPathParamColonRoutes10Bon(b *testing.B) {
 	router := loadBon(pathParamColonRoutes10)
 	benchmark(b, pathParamColonRoutes10, router)
 }
+
+// naoina/denco
+// https://github.com/naoina/denco
+func BenchmarkStaticRoutesRootDenco(b *testing.B) {
+	router := loadDenco(staticRoutesRoot)
+	benchmark(b, staticRoutesRoot, router)
+}
+
+func BenchmarkStaticRoutes1Denco(b *testing.B) {
+	router := loadDenco(staticRoutes1)
+	benchmark(b, staticRoutes1, router)
+}
+
+func BenchmarkStaticRoutes5Denco(b *testing.B) {
+	router := loadDenco(staticRoutes5)
+	benchmark(b, staticRoutes5, router)
+}
+
+func BenchmarkStaticRoutes10Denco(b *testing.B) {
+	router := loadDenco(staticRoutes10)
+	benchmark(b, staticRoutes10, router)
+}
+
+func BenchmarkPathParamColonRoutes1Denco(b *testing.B) {
+	router := loadDenco(pathParamColonRoutes1)
+	benchmark(b, pathParamColonRoutes1, router)
+}
+
+func BenchmarkPathParamColonRoutes5Denco(b *testing.B) {
+	router := loadDenco(pathParamColonRoutes5)
+	benchmark(b, pathParamColonRoutes5, router)
+}
+
+func BenchmarkPathParamColonRoutes10Denco(b *testing.B) {
+	router := loadDenco(pathParamColonRoutes10)
+	benchmark(b, pathParamColonRoutes10, router)
+}

@@ -10,6 +10,8 @@ require (
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/gorilla/mux v1.8.0
 	github.com/julienschmidt/httprouter v1.3.0
+	github.com/naoina/denco v0.0.0-20180930074809-8475105a6b4c
+	github.com/nissy/bon v1.3.0
 	github.com/uptrace/bunrouter v1.0.19
 )
 
@@ -25,7 +27,6 @@ require (
 	github.com/mattn/go-isatty v0.0.16 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/nissy/bon v1.3.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.5 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	golang.org/x/crypto v0.2.0 // indirect
