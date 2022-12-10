@@ -10,6 +10,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	gorillamux "github.com/gorilla/mux"
 	"github.com/julienschmidt/httprouter"
+	"github.com/nissy/bon"
 	"github.com/uptrace/bunrouter"
 )
 
@@ -113,5 +114,12 @@ func loadGorillaMux(r route) http.Handler {
 	router := gorillamux.NewRouter()
 	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
 	router.HandleFunc(r.path, handler)
+	return router
+}
+
+func loadBon(r route) http.Handler {
+	router := bon.NewRouter()
+	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
+	router.Get(r.path, handler)
 	return router
 }
