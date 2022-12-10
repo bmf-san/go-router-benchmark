@@ -435,3 +435,40 @@ func BenchmarkPathParamColonRoutes10Echo(b *testing.B) {
 	router := loadEcho(pathParamColonRoutes10)
 	benchmark(b, pathParamColonRoutes10, router)
 }
+
+// gocraft/web
+// https://github.com/gocraft/web
+func BenchmarkStaticRoutesRootGocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(staticRoutesRoot)
+	benchmark(b, staticRoutesRoot, router)
+}
+
+func BenchmarkStaticRoutes1GocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(staticRoutes1)
+	benchmark(b, staticRoutes1, router)
+}
+
+func BenchmarkStaticRoutes5GocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(staticRoutes5)
+	benchmark(b, staticRoutes5, router)
+}
+
+func BenchmarkStaticRoutes10GocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(staticRoutes10)
+	benchmark(b, staticRoutes10, router)
+}
+
+func BenchmarkPathParamColonRoutes1GocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(pathParamColonRoutes1)
+	benchmark(b, pathParamColonRoutes1, router)
+}
+
+func BenchmarkPathParamColonRoutes5GocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(pathParamColonRoutes5)
+	benchmark(b, pathParamColonRoutes5, router)
+}
+
+func BenchmarkPathParamColonRoutes10GocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(pathParamColonRoutes10)
+	benchmark(b, pathParamColonRoutes10, router)
+}

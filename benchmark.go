@@ -8,6 +8,7 @@ import (
 	"github.com/dimfeld/httptreemux/v5"
 	"github.com/gin-gonic/gin"
 	"github.com/go-chi/chi/v5"
+	"github.com/gocraft/web"
 	gorillamux "github.com/gorilla/mux"
 	"github.com/julienschmidt/httprouter"
 	"github.com/labstack/echo"
@@ -144,4 +145,15 @@ func loadEcho(r route) http.Handler {
 	e.GET(r.path, handler)
 
 	return e
+}
+
+type GocraftWebContext struct{}
+
+func (c *GocraftWebContext) gocraftwebHandler(_ web.ResponseWriter, _ *web.Request) {
+}
+
+func loadGocraftWeb(r route) http.Handler {
+	router := web.New(GocraftWebContext{}).Get(r.path, (*GocraftWebContext).gocraftwebHandler)
+
+	return router
 }

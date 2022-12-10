@@ -22,6 +22,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.11.1 // indirect
 	github.com/goccy/go-json v0.9.11 // indirect
+	github.com/gocraft/web v0.0.0-20190207150652-9707327fb69b // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/labstack/echo v3.3.10+incompatible // indirect
 	github.com/labstack/echo/v4 v4.9.1 // indirect
