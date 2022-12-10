@@ -10,6 +10,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	gorillamux "github.com/gorilla/mux"
 	"github.com/julienschmidt/httprouter"
+	"github.com/naoina/denco"
 	"github.com/nissy/bon"
 	"github.com/uptrace/bunrouter"
 )
@@ -121,5 +122,17 @@ func loadBon(r route) http.Handler {
 	router := bon.NewRouter()
 	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
 	router.Get(r.path, handler)
+	return router
+}
+
+func loadDenco(r route) http.Handler {
+	mux := denco.NewMux()
+	handler := func(w http.ResponseWriter, r *http.Request, params denco.Params) {}
+	router, err := mux.Build([]denco.Handler{
+		mux.GET(r.path, handler),
+	})
+	if err != nil {
+		panic(err)
+	}
 	return router
 }
