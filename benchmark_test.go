@@ -472,3 +472,40 @@ func BenchmarkPathParamColonRoutes10GocraftWeb(b *testing.B) {
 	router := loadGocraftWeb(pathParamColonRoutes10)
 	benchmark(b, pathParamColonRoutes10, router)
 }
+
+// vardius/gorouter
+// https://github.com/vardius/gorouter
+func BenchmarkStaticRoutesRootGorouter(b *testing.B) {
+	router := loadGorouter(staticRoutesRoot)
+	benchmark(b, staticRoutesRoot, router)
+}
+
+func BenchmarkStaticRoutes1Gorouter(b *testing.B) {
+	router := loadGorouter(staticRoutes1)
+	benchmark(b, staticRoutes1, router)
+}
+
+func BenchmarkStaticRoutes5Gorouter(b *testing.B) {
+	router := loadGorouter(staticRoutes5)
+	benchmark(b, staticRoutes5, router)
+}
+
+func BenchmarkStaticRoutes10Gorouter(b *testing.B) {
+	router := loadGorouter(staticRoutes10)
+	benchmark(b, staticRoutes10, router)
+}
+
+func BenchmarkPathParamBracketRoutes1Gorouter(b *testing.B) {
+	router := loadGorouter(pathParamBracketRoutes1)
+	benchmark(b, pathParamBracketRoutes1, router)
+}
+
+func BenchmarkPathParamBracketRoutes5Gorouter(b *testing.B) {
+	router := loadGorouter(pathParamBracketRoutes5)
+	benchmark(b, pathParamBracketRoutes5, router)
+}
+
+func BenchmarkPathParamBracketRoutes10Gorouter(b *testing.B) {
+	router := loadGorouter(pathParamBracketRoutes10)
+	benchmark(b, pathParamBracketRoutes10, router)
+}

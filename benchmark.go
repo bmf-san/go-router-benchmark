@@ -15,6 +15,7 @@ import (
 	"github.com/naoina/denco"
 	"github.com/nissy/bon"
 	"github.com/uptrace/bunrouter"
+	"github.com/vardius/gorouter/v4"
 )
 
 // route is a struct for route.
@@ -155,5 +156,12 @@ func (c *GocraftWebContext) gocraftwebHandler(_ web.ResponseWriter, _ *web.Reque
 func loadGocraftWeb(r route) http.Handler {
 	router := web.New(GocraftWebContext{}).Get(r.path, (*GocraftWebContext).gocraftwebHandler)
 
+	return router
+}
+
+func loadGorouter(r route) http.Handler {
+	router := gorouter.New()
+	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
+	router.GET(r.path, handler)
 	return router
 }
