@@ -8,6 +8,7 @@ import (
 	"github.com/dimfeld/httptreemux/v5"
 	"github.com/gin-gonic/gin"
 	"github.com/go-chi/chi/v5"
+	ozzorouting "github.com/go-ozzo/ozzo-routing/v2"
 	"github.com/gocraft/web"
 	gorillamux "github.com/gorilla/mux"
 	"github.com/julienschmidt/httprouter"
@@ -62,6 +63,18 @@ var pathParamBracketRoutes5 = route{
 
 var pathParamBracketRoutes10 = route{
 	"/foo/{bar}/{baz}/{qux}/{quux}/{corge}/{grault}/{garply}/{waldo}/{fred}/{plugh}", "/foo/bar/baz/qux/quux/corge/grault/garply/waldo/fred/plugh",
+}
+
+var pathParamInequalitySignRoutes1 = route{
+	"/foo/<bar>", "/foo/bar",
+}
+
+var pathParamInequalitySignRoutes5 = route{
+	"/foo/<bar>/<baz>/<qux>/<quux>/<corge>", "/foo/bar/baz/qux/quux/corge",
+}
+
+var pathParamInequalitySignRoutes10 = route{
+	"/foo/<bar>/<baz>/<qux>/<quux>/<corge>/<grault>/<garply>/<waldo>/<fred>/<plugh>", "/foo/bar/baz/qux/quux/corge/grault/garply/waldo/fred/plugh",
 }
 
 func loadGoblin(r route) http.Handler {
@@ -163,5 +176,12 @@ func loadGorouter(r route) http.Handler {
 	router := gorouter.New()
 	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
 	router.GET(r.path, handler)
+	return router
+}
+
+func loadOzzoRouting(r route) http.Handler {
+	router := ozzorouting.New()
+	handler := func(_ *ozzorouting.Context) error { return nil }
+	router.Get(r.path, handler)
 	return router
 }
