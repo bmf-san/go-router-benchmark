@@ -27,6 +27,7 @@ Benchmarks are obtained by narrowing down to specific functions.
 - [labstack/echo](https://github.com/labstack/echo/v4)
 - [gocraft/web](https://github.com/gocraft/web)
 - [vardius/gorouter](https://github.com/vardius/gorouter)
+- [go-ozzo/ozzo-routing](https://github.com/go-ozzo/ozzo-routing)
 
 # How to run benchmark test
 `make test-benchmark`
