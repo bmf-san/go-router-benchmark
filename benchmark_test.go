@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func serveHTTP(b *testing.B, r route, router http.Handler) {
+func testServeHTTP(b *testing.B, r route, router http.Handler) {
 	rec := httptest.NewRecorder()
 	req, err := http.NewRequest(http.MethodGet, r.reqPath, nil)
 	if err != nil {
@@ -26,7 +26,7 @@ func benchmark(b *testing.B, r route, router http.Handler) {
 	b.ReportAllocs()
 	b.ResetTimer()
 
-	serveHTTP(b, r, router)
+	testServeHTTP(b, r, router)
 }
 
 // bmf-san/goblin
