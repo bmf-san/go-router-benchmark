@@ -25,6 +25,13 @@ type route struct {
 	reqPath string
 }
 
+func loadServeMux(r route) http.Handler {
+	router := http.NewServeMux()
+	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
+	router.HandleFunc(r.path, handler)
+	return router
+}
+
 func loadGoblin(r route) http.Handler {
 	router := goblin.NewRouter()
 	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
