@@ -1,18 +1,6 @@
 # go-router-benchmark
 Compare the performance of routers built with golang.
 
-# Motivation
-I have implemented a router called [bmf-san/goblin](https://github.com/bmf-san/goblin), and I created this repository to compare it with other routers and get hints on how to improve [bmf-san/goblin](https://github.com/bmf-san/goblin).
-
-Another reason is that [this nice repository](https://github.com/julienschmidt/go-http-routing-benchmark) seems to have stopped being maintained, so I wanted to have a benchmark test for the router that I could manage myself.
-
-# Benchmark test
-This benchmark test is not a complete representation of router performance differences.
-
-This is because it is difficult to prepare a perfect test case due to differences in router specifications and different data structures.
-
-Benchmarks are obtained by narrowing down to specific functions.
-
 # Listed routers
 - [bmf-san/goblin](https://github.com/bmf-san/goblin)
 - [julienschmidt/httprouter](https://github.com/julienschmidt/httprouter)
@@ -29,119 +17,185 @@ Benchmarks are obtained by narrowing down to specific functions.
 - [vardius/gorouter](https://github.com/vardius/gorouter)
 - [go-ozzo/ozzo-routing](https://github.com/go-ozzo/ozzo-routing)
 
+Since [net/http#ServeMux](https://pkg.go.dev/net/http#ServeMux) does not have the capability to support path param route, only the static route test case is comparable.
+
+# Motivation
+I have implemented a router called [bmf-san/goblin](https://github.com/bmf-san/goblin), and I created this repository to compare it with other routers and get hints on how to improve [bmf-san/goblin](https://github.com/bmf-san/goblin).
+
+Another reason is that [julienschmidt/go-http-routing-benchmark](https://github.com/julienschmidt/go-http-routing-benchmark) seems to have stopped being maintained, so I wanted to have a benchmarker for the router that I could manage myself.
+
+# Benchmark test
+This benchmark tests is not a perfect comparison of HTTP Router performance.
+The reasons are as follows
+
+- Not practical to cover all test cases because each HTTP Router has different specifications
+- Performance may be unfairly evaluated depending on the routing test cases defined, since each HTTP Router has its own strengths and weaknesses depending on its data structures and algorithms.
+
+Although the benchmark test is based on a specific case, it is possible to see some trends in performance differences.
+
+Performance measurements will be made on the routing process of the HTTP Router.
+More specifically, we will test the `ServeHTTP` function of [http#Handler](https://pkg.go.dev/net/http#Handler).
+
+We do not measure the performance of the process that defines the routing of the HTTP Router.
+The process of defining routing is the process of registering data for the routing process.
+For example, the code for net/http is as follows.
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http" )
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello World")
+}
+
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", handler) // here
+	ListenAndServe(":8080", mux)
+}
+```
+
+We believe that the part that handles routing is called more often than the part that defines routing, and thus accounts for the majority of the HTTP Router's performance.
+
+## Static route
+A static route is a route without variable parameters such as `/foo/bar`.
+
+Static route measures performance by benchmarking routing tests with the following three input values.
+
+- `/`
+- `/foo`
+- `/foo/bar/baz/qux/quux`
+- `/foo/bar/baz/qux/quux/corge/grault/garply/waldo/fred`
+
+## Path parameter route
+A path parameter route is a route with variable parameters such as `/foo/:bar`.
+
+In path parameter route, we perform benchmark routing tests with the following three input values to measure the performance.
+
+- `/foo/:bar`
+- `/foo/:bar/:baz/:qux/:quux/:corge`
+- `/foo/:bar/:baz/:qux/:quux/:corge/:grault/:garply/:waldo/:fred/:plugh`
+
+Since different HTTP Routers have different ways of expressing parameters, there are several cases where another symbol is used in addition to `:`.
+
 # How to run benchmark test
 `make test-benchmark`
 
-## Commands for running benchmark test
-`make test-benchmark`
-
-## Results
+# Results
 ```sh
 go test -bench=. -benchmem
 goos: darwin
 goarch: amd64
 pkg: github.com/go-router-benchmark
 cpu: VirtualApple @ 2.50GHz
-BenchmarkStaticRoutesRootGoblin-8                               37810608                31.62 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Goblin-8                                  17207332                68.55 ns/op             16 B/op          1 allocs/op
-BenchmarkStaticRoutes5Goblin-8                                   5786544               208.3 ns/op      80 B/op          1 allocs/op
-BenchmarkStaticRoutes10Goblin-8                                  2992412               400.3 ns/op     160 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes1Goblin-8                           1907245               627.5 ns/op     409 B/op          6 allocs/op
-BenchmarkPathParamColonRoutes5Goblin-8                            525704              2269 ns/op      965 B/op          13 allocs/op
-BenchmarkPathParamColonRoutes10Goblin-8                           275090              4399 ns/op     1608 B/op          19 allocs/op
-BenchmarkStaticRoutesRootHTTPRouter-8                           100000000               10.46 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1HTTPRouter-8                              100000000               10.33 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes5HTTPRouter-8                              100000000               10.44 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes10HTTPRouter-8                             100000000               10.36 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1HTTPRouter-8                      27414811                43.20 ns/op             32 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes5HTTPRouter-8                      10295874               114.4 ns/op     160 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes10HTTPRouter-8                      6092434               197.3 ns/op     320 B/op          1 allocs/op
-BenchmarkStaticRoutesRootChi-8                                   5429904               220.0 ns/op     304 B/op          2 allocs/op
-BenchmarkStaticRoutes1Chi-8                                      5290057               220.6 ns/op     304 B/op          2 allocs/op
-BenchmarkStaticRoutes5Chi-8                                      5434046               219.3 ns/op     304 B/op          2 allocs/op
-BenchmarkStaticRoutes10Chi-8                                     5505698               212.7 ns/op     304 B/op          2 allocs/op
-BenchmarkPathParamBracketRoutes1Chi-8                            4445071               268.9 ns/op     304 B/op          2 allocs/op
-BenchmarkPathParamBracketRoutes5Chi-8                            2730680               437.0 ns/op     304 B/op          2 allocs/op
-BenchmarkPathParamBracketRoutes10Chi-8                           1888065               636.3 ns/op     304 B/op          2 allocs/op
-BenchmarkStaticRoutesRootGin-8                                  32862794                36.33 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Gin-8                                     33070339                36.07 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Gin-8                                     32586816                36.17 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Gin-8                                    32143107                37.20 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1Gin-8                             27500701                42.62 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes5Gin-8                             15258900                78.41 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes10Gin-8                             9522596               127.7 ns/op       0 B/op          0 allocs/op
-BenchmarkStaticRoutesRootBunRouter-8                            64215045                18.42 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1BunRouter-8                               56828720                21.02 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes5BunRouter-8                               56755030                20.99 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes10BunRouter-8                              56908671                20.84 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1BunRouter-8                       35162946                33.80 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes5BunRouter-8                        8425648               140.7 ns/op       0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes10BunRouter-8                       4257427               283.7 ns/op       0 B/op          0 allocs/op
-BenchmarkStaticRoutesRootHTTPTreeMux-8                           6690556               179.2 ns/op     328 B/op          3 allocs/op
-BenchmarkStaticRoutes1HTTPTreeMux-8                              6562962               183.0 ns/op     328 B/op          3 allocs/op
-BenchmarkStaticRoutes5HTTPTreeMux-8                              5362312               224.5 ns/op     328 B/op          3 allocs/op
-BenchmarkStaticRoutes10HTTPTreeMux-8                             4219711               284.1 ns/op     328 B/op          3 allocs/op
-BenchmarkPathParamColonRoutes1HTTPTreeMux-8                      3174328               377.0 ns/op     680 B/op          6 allocs/op
-BenchmarkPathParamColonRoutes5HTTPTreeMux-8                      1545889               757.7 ns/op     904 B/op          9 allocs/op
-BenchmarkPathParamColonRoutes10HTTPTreeMux-8                      807580              1474 ns/op     1742 B/op          11 allocs/op
-BenchmarkStaticRoutesRootBeegoMux-8                             22258030                52.52 ns/op             32 B/op          1 allocs/op
-BenchmarkStaticRoutes1BeegoMux-8                                15893838                75.32 ns/op             32 B/op          1 allocs/op
-BenchmarkStaticRoutes5BeegoMux-8                                 1000000              1071 ns/op       32 B/op           1 allocs/op
-BenchmarkStaticRoutes10BeegoMux-8                                 592300              2029 ns/op       32 B/op           1 allocs/op
-BenchmarkPathParamColonRoutes1BeegoMux-8                         3219261               373.9 ns/op     672 B/op          5 allocs/op
-BenchmarkPathParamColonRoutes5BeegoMux-8                          824432              1420 ns/op      672 B/op           5 allocs/op
-BenchmarkPathParamColonRoutes10BeegoMux-8                         354176              3350 ns/op     1254 B/op           6 allocs/op
-BenchmarkStaticRoutesRootGorillaMux-8                            2076849               574.2 ns/op     720 B/op          7 allocs/op
-BenchmarkStaticRoutes1GorillaMux-8                               2066920               579.6 ns/op     720 B/op          7 allocs/op
-BenchmarkStaticRoutes5GorillaMux-8                               1967010               610.1 ns/op     720 B/op          7 allocs/op
-BenchmarkStaticRoutes10GorillaMux-8                              1824106               658.2 ns/op     720 B/op          7 allocs/op
-BenchmarkPathParamBracketRoutes1GorillaMux-8                     1339666               895.5 ns/op    1024 B/op          8 allocs/op
-BenchmarkPathParamBracketRoutes5GorillaMux-8                      526460              2262 ns/op     1088 B/op           8 allocs/op
-BenchmarkPathParamBracketRoutes10GorillaMux-8                     238946              5008 ns/op     1751 B/op           9 allocs/op
-BenchmarkStaticRoutesRootBon-8                                  88309966                13.51 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Bon-8                                     87832992                13.51 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Bon-8                                     86620446                13.48 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Bon-8                                    87585646                14.03 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1Bon-8                              6392168               186.3 ns/op     304 B/op          2 allocs/op
-BenchmarkPathParamColonRoutes5Bon-8                              4628920               259.3 ns/op     304 B/op          2 allocs/op
-BenchmarkPathParamColonRoutes10Bon-8                             3381514               355.9 ns/op     304 B/op          2 allocs/op
-BenchmarkStaticRoutesRootDenco-8                                79634784                14.46 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Denco-8                                   79188319                14.38 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Denco-8                                   79437754                14.36 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Denco-8                                  74332171                15.32 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1Denco-8                           19618006                60.16 ns/op             32 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes5Denco-8                            8545141               140.5 ns/op     160 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes10Denco-8                           5004351               239.7 ns/op     320 B/op          1 allocs/op
-BenchmarkStaticRoutesRootEcho-8                                 33267644                35.72 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Echo-8                                    30976101                38.24 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Echo-8                                    21207642                56.36 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Echo-8                                   12649693                94.39 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1Echo-8                            26137147                45.25 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes5Echo-8                            11194768               106.2 ns/op       0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes10Echo-8                            6530691               183.1 ns/op       0 B/op          0 allocs/op
-BenchmarkStaticRoutesRootGocraftWeb-8                            1276323               934.8 ns/op     288 B/op          6 allocs/op
-BenchmarkStaticRoutes1GocraftWeb-8                               1246320               949.0 ns/op     288 B/op          6 allocs/op
-BenchmarkStaticRoutes5GocraftWeb-8                               1000000              1075 ns/op      352 B/op           6 allocs/op
-BenchmarkStaticRoutes10GocraftWeb-8                               967153              1210 ns/op      432 B/op           6 allocs/op
-BenchmarkPathParamColonRoutes1GocraftWeb-8                       1000000              1154 ns/op      656 B/op           9 allocs/op
-BenchmarkPathParamColonRoutes5GocraftWeb-8                        794268              1542 ns/op      944 B/op          12 allocs/op
-BenchmarkPathParamColonRoutes10GocraftWeb-8                       519505              2243 ns/op     1862 B/op          14 allocs/op
-BenchmarkStaticRoutesRootGorouter-8                             41112081                29.07 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Gorouter-8                                33128236                36.39 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Gorouter-8                                18102231                66.23 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Gorouter-8                               10874481               110.1 ns/op       0 B/op          0 allocs/op
-BenchmarkPathParamBracketRoutes1Gorouter-8                       4731598               253.9 ns/op     360 B/op          4 allocs/op
-BenchmarkPathParamBracketRoutes5Gorouter-8                       2986797               401.4 ns/op     488 B/op          4 allocs/op
-BenchmarkPathParamBracketRoutes10Gorouter-8                      2219754               539.8 ns/op     648 B/op          4 allocs/op
-BenchmarkStaticRoutesRootOzzoRouting-8                          36044740                32.67 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes1OzzoRouting-8                             34365777                34.35 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes5OzzoRouting-8                             25027525                47.43 ns/op              0 B/op          0 allocs/op
-BenchmarkStaticRoutes10OzzoRouting-8                            18702718                63.80 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamInequalitySignRoutes1OzzoRouting-8            27764709                42.93 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamInequalitySignRoutes5OzzoRouting-8            13905720                86.12 ns/op              0 B/op          0 allocs/op
-BenchmarkPathParamInequalitySignRoutes10OzzoRouting-8            8533772               140.4 ns/op       0 B/op          0 allocs/op
+BenchmarkStaticRoutesRootServeMux-8                             23305570                50.96 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1ServeMux-8                                21346630                56.29 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5ServeMux-8                                13507384                88.60 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes10ServeMux-8                                8871856               135.2 ns/op             0 B/op          0 allocs/op
+BenchmarkStaticRoutesRootGoblin-8                               31467156                37.69 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1Goblin-8                                  16274073                71.43 ns/op           16 B/op          1 allocs/op
+BenchmarkStaticRoutes5Goblin-8                                   5900212               203.9 ns/op            80 B/op          1 allocs/op
+BenchmarkStaticRoutes10Goblin-8                                  3205656               374.0 ns/op           160 B/op          1 allocs/op
+BenchmarkPathParamColonRoutes1Goblin-8                           1936185               619.5 ns/op           408 B/op          6 allocs/op
+BenchmarkPathParamColonRoutes5Goblin-8                            520683              2237 ns/op             964 B/op         13 allocs/op
+BenchmarkPathParamColonRoutes10Goblin-8                           276434              4292 ns/op            1611 B/op         19 allocs/op
+BenchmarkStaticRoutesRootHTTPRouter-8                           79534504                13.29 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1HTTPRouter-8                              79775299                13.40 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5HTTPRouter-8                              79895688                13.38 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes10HTTPRouter-8                             80145372                13.40 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes1HTTPRouter-8                      24690871                46.86 ns/op           32 B/op          1 allocs/op
+BenchmarkPathParamColonRoutes5HTTPRouter-8                       9880882               119.9 ns/op           160 B/op          1 allocs/op
+BenchmarkPathParamColonRoutes10HTTPRouter-8                      5949777               200.5 ns/op           320 B/op          1 allocs/op
+BenchmarkStaticRoutesRootChi-8                                   5480019               216.8 ns/op           304 B/op          2 allocs/op
+BenchmarkStaticRoutes1Chi-8                                      5508302               214.6 ns/op           304 B/op          2 allocs/op
+BenchmarkStaticRoutes5Chi-8                                      5643144               211.5 ns/op           304 B/op          2 allocs/op
+BenchmarkStaticRoutes10Chi-8                                     5650141               212.2 ns/op           304 B/op          2 allocs/op
+BenchmarkPathParamBracketRoutes1Chi-8                            4443690               269.6 ns/op           304 B/op          2 allocs/op
+BenchmarkPathParamBracketRoutes5Chi-8                            2747660               443.0 ns/op           304 B/op          2 allocs/op
+BenchmarkPathParamBracketRoutes10Chi-8                           1867706               639.0 ns/op           304 B/op          2 allocs/op
+BenchmarkStaticRoutesRootGin-8                                  33840350                35.03 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1Gin-8                                     33891363                34.97 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5Gin-8                                     33447457                35.87 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes10Gin-8                                    32442332                36.17 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes1Gin-8                             28137997                40.66 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes5Gin-8                             15604334                76.89 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes10Gin-8                             9713322               123.6 ns/op             0 B/op          0 allocs/op
+BenchmarkStaticRoutesRootBunRouter-8                            62378167                19.04 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1BunRouter-8                               54281038                21.52 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5BunRouter-8                               54312976                21.70 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes10BunRouter-8                              54036307                21.85 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes1BunRouter-8                       36516248                32.37 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes5BunRouter-8                        8669384               138.0 ns/op             0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes10BunRouter-8                       4173550               284.7 ns/op             0 B/op          0 allocs/op
+BenchmarkStaticRoutesRootHTTPTreeMux-8                           6744598               179.6 ns/op           328 B/op          3 allocs/op
+BenchmarkStaticRoutes1HTTPTreeMux-8                              6489350               180.7 ns/op           328 B/op          3 allocs/op
+BenchmarkStaticRoutes5HTTPTreeMux-8                              5359826               234.5 ns/op           328 B/op          3 allocs/op
+BenchmarkStaticRoutes10HTTPTreeMux-8                             4188642               286.9 ns/op           328 B/op          3 allocs/op
+BenchmarkPathParamColonRoutes1HTTPTreeMux-8                      3014743               378.0 ns/op           680 B/op          6 allocs/op
+BenchmarkPathParamColonRoutes5HTTPTreeMux-8                      1498790               787.8 ns/op           904 B/op          9 allocs/op
+BenchmarkPathParamColonRoutes10HTTPTreeMux-8                      805834              1450 ns/op            1742 B/op         11 allocs/op
+BenchmarkStaticRoutesRootBeegoMux-8                             23302629                50.27 ns/op           32 B/op          1 allocs/op
+BenchmarkStaticRoutes1BeegoMux-8                                16677880                71.03 ns/op           32 B/op          1 allocs/op
+BenchmarkStaticRoutes5BeegoMux-8                                 1000000              1077 ns/op              32 B/op          1 allocs/op
+BenchmarkStaticRoutes10BeegoMux-8                                 577743              2026 ns/op              32 B/op          1 allocs/op
+BenchmarkPathParamColonRoutes1BeegoMux-8                         3329392               366.7 ns/op           672 B/op          5 allocs/op
+BenchmarkPathParamColonRoutes5BeegoMux-8                          813811              1439 ns/op             672 B/op          5 allocs/op
+BenchmarkPathParamColonRoutes10BeegoMux-8                         344250              3417 ns/op            1254 B/op          6 allocs/op
+BenchmarkStaticRoutesRootGorillaMux-8                            2082201               571.2 ns/op           720 B/op          7 allocs/op
+BenchmarkStaticRoutes1GorillaMux-8                               2088121               575.9 ns/op           720 B/op          7 allocs/op
+BenchmarkStaticRoutes5GorillaMux-8                               1977076               612.0 ns/op           720 B/op          7 allocs/op
+BenchmarkStaticRoutes10GorillaMux-8                              1843194               648.8 ns/op           720 B/op          7 allocs/op
+BenchmarkPathParamBracketRoutes1GorillaMux-8                     1366618               874.8 ns/op          1024 B/op          8 allocs/op
+BenchmarkPathParamBracketRoutes5GorillaMux-8                      516780              2217 ns/op            1088 B/op          8 allocs/op
+BenchmarkPathParamBracketRoutes10GorillaMux-8                     242192              4879 ns/op            1751 B/op          9 allocs/op
+BenchmarkStaticRoutesRootBon-8                                  84426278                13.91 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1Bon-8                                     84835378                13.92 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5Bon-8                                     84868131                13.90 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes10Bon-8                                    81009922                14.74 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes1Bon-8                              6376364               186.0 ns/op           304 B/op          2 allocs/op
+BenchmarkPathParamColonRoutes5Bon-8                              4626661               258.9 ns/op           304 B/op          2 allocs/op
+BenchmarkPathParamColonRoutes10Bon-8                             3383512               354.7 ns/op           304 B/op          2 allocs/op
+BenchmarkStaticRoutesRootDenco-8                                86391010                13.73 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1Denco-8                                   86784367                13.73 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5Denco-8                                   86470388                13.72 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes10Denco-8                                  86911906                13.72 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes1Denco-8                           19862026                59.49 ns/op           32 B/op          1 allocs/op
+BenchmarkPathParamColonRoutes5Denco-8                            8485465               141.3 ns/op           160 B/op          1 allocs/op
+BenchmarkPathParamColonRoutes10Denco-8                           5047719               237.2 ns/op           320 B/op          1 allocs/op
+BenchmarkStaticRoutesRootEcho-8                                 41954373                28.08 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1Echo-8                                    36967816                32.18 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5Echo-8                                    23895873                49.96 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes10Echo-8                                   12395061                96.61 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes1Echo-8                            30886804                39.32 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes5Echo-8                            12091669                98.75 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamColonRoutes10Echo-8                            6830480               176.0 ns/op             0 B/op          0 allocs/op
+BenchmarkStaticRoutesRootGocraftWeb-8                            1259409               943.2 ns/op           288 B/op          6 allocs/op
+BenchmarkStaticRoutes1GocraftWeb-8                               1252980               955.4 ns/op           288 B/op          6 allocs/op
+BenchmarkStaticRoutes5GocraftWeb-8                               1000000              1107 ns/op             352 B/op          6 allocs/op
+BenchmarkStaticRoutes10GocraftWeb-8                               935240              1217 ns/op             432 B/op          6 allocs/op
+BenchmarkPathParamColonRoutes1GocraftWeb-8                        966060              1165 ns/op             656 B/op          9 allocs/op
+BenchmarkPathParamColonRoutes5GocraftWeb-8                        756178              1545 ns/op             944 B/op         12 allocs/op
+BenchmarkPathParamColonRoutes10GocraftWeb-8                       518744              2281 ns/op            1862 B/op         14 allocs/op
+BenchmarkStaticRoutesRootGorouter-8                             23695804                50.08 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1Gorouter-8                                26121121                44.53 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5Gorouter-8                                11303084               102.8 ns/op             0 B/op          0 allocs/op
+BenchmarkStaticRoutes10Gorouter-8                                7328988               163.8 ns/op             0 B/op          0 allocs/op
+BenchmarkPathParamBracketRoutes1Gorouter-8                       4579246               267.3 ns/op           360 B/op          4 allocs/op
+BenchmarkPathParamBracketRoutes5Gorouter-8                       2987978               426.6 ns/op           488 B/op          4 allocs/op
+BenchmarkPathParamBracketRoutes10Gorouter-8                      2060394               550.8 ns/op           648 B/op          4 allocs/op
+BenchmarkStaticRoutesRootOzzoRouting-8                          28247007                41.33 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes1OzzoRouting-8                             28425942                42.13 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes5OzzoRouting-8                             23588305                50.34 ns/op            0 B/op          0 allocs/op
+BenchmarkStaticRoutes10OzzoRouting-8                            18309638                65.64 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamInequalitySignRoutes1OzzoRouting-8            23027325                51.88 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamInequalitySignRoutes5OzzoRouting-8            11985876                99.66 ns/op            0 B/op          0 allocs/op
+BenchmarkPathParamInequalitySignRoutes10OzzoRouting-8            7554290               159.3 ns/op             0 B/op          0 allocs/op
 PASS
-ok      github.com/go-router-benchmark  134.328s
+ok      github.com/go-router-benchmark  140.014s
 ```
 
 # Contribution
@@ -149,11 +203,11 @@ We are always accepting issues, pull requests, and other requests and questions.
 
 We look forward to your contribution！
 
+If you have an HTTP Router or test case you would like to add, please send us an Issue or Pull Request.
+
 # License
 This project is licensed under the terms of the MIT license.
 
 ## Author
-bmf - A Web Developer in Japan.
-
 - [@bmf-san](https://twitter.com/bmf_san)
-- [bmf-tech](http://bmf-tech.com/)
+- [bmf-tech.com](http://bmf-tech.com/)

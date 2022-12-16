@@ -14,6 +14,9 @@ func testServeHTTP(b *testing.B, r route, router http.Handler) {
 		b.Fatal(err)
 	}
 
+	b.ReportAllocs()
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
 		router.ServeHTTP(rec, req)
 		if rec.Code != 200 {
@@ -23,10 +26,29 @@ func testServeHTTP(b *testing.B, r route, router http.Handler) {
 }
 
 func benchmark(b *testing.B, r route, router http.Handler) {
-	b.ReportAllocs()
-	b.ResetTimer()
-
 	testServeHTTP(b, r, router)
+}
+
+// net/http#ServeMux
+// https://pkg.go.dev/net/http#ServeMux
+func BenchmarkStaticRoutesRootServeMux(b *testing.B) {
+	router := loadServeMux(staticRoutesRoot)
+	benchmark(b, staticRoutesRoot, router)
+}
+
+func BenchmarkStaticRoutes1ServeMux(b *testing.B) {
+	router := loadServeMux(staticRoutes1)
+	benchmark(b, staticRoutes1, router)
+}
+
+func BenchmarkStaticRoutes5ServeMux(b *testing.B) {
+	router := loadServeMux(staticRoutes5)
+	benchmark(b, staticRoutes5, router)
+}
+
+func BenchmarkStaticRoutes10ServeMux(b *testing.B) {
+	router := loadServeMux(staticRoutes10)
+	benchmark(b, staticRoutes10, router)
 }
 
 // bmf-san/goblin
