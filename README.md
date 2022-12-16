@@ -1,19 +1,9 @@
 # go-router-benchmark
 Compare the performance of routers built with golang.
 
-# Motivation
-I have implemented a router called [bmf-san/goblin](https://github.com/bmf-san/goblin), and I created this repository to compare it with other routers and get hints on how to improve [bmf-san/goblin](https://github.com/bmf-san/goblin).
-
-Another reason is that [this nice repository](https://github.com/julienschmidt/go-http-routing-benchmark) seems to have stopped being maintained, so I wanted to have a benchmark test for the router that I could manage myself.
-
-# Benchmark test
-This benchmark test is not a complete representation of router performance differences.
-
-This is because it is difficult to prepare a perfect test case due to differences in router specifications and different data structures.
-
-Benchmarks are obtained by narrowing down to specific functions.
-
 # Listed routers
+- [net/http#ServeMux](https://pkg.go.dev/net/http#ServeMux)
+  -
 - [bmf-san/goblin](https://github.com/bmf-san/goblin)
 - [julienschmidt/httprouter](https://github.com/julienschmidt/httprouter)
 - [go-chi/chi](https://github.com/go-chi/chi)
@@ -29,13 +19,73 @@ Benchmarks are obtained by narrowing down to specific functions.
 - [vardius/gorouter](https://github.com/vardius/gorouter)
 - [go-ozzo/ozzo-routing](https://github.com/go-ozzo/ozzo-routing)
 
+# Motivation
+I have implemented a router called [bmf-san/goblin](https://github.com/bmf-san/goblin), and I created this repository to compare it with other routers and get hints on how to improve [bmf-san/goblin](https://github.com/bmf-san/goblin).
+
+Another reason is that [julienschmidt/go-http-routing-benchmark](https://github.com/julienschmidt/go-http-routing-benchmark) seems to have stopped being maintained, so I wanted to have a benchmarker for the router that I could manage myself.
+
+# Benchmark test
+This benchmark tests is not a perfect comparison of HTTP Router performance.
+The reasons are as follows
+
+- Not practical to cover all test cases because each HTTP Router has different specifications
+- Performance may be unfairly evaluated depending on the routing test cases defined, since each HTTP Router has its own strengths and weaknesses depending on its data structures and algorithms.
+
+Although the benchmark test is based on a specific case, it is possible to see some trends in performance differences.
+
+Performance measurements will be made on the routing process of the HTTP Router.
+More specifically, we will test the `ServeHTTP` function of [http#Handler](https://pkg.go.dev/net/http#Handler).
+
+We do not measure the performance of the process that defines the routing of the HTTP Router.
+The process of defining routing is the process of registering data for the routing process.
+For example, the code for net/http is as follows.
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http" )
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello World")
+}
+
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", handler) // here
+	ListenAndServe(":8080", mux)
+}
+```
+
+We believe that the part that handles routing is called more often than the part that defines routing, and thus accounts for the majority of the HTTP Router's performance.
+
+## Static route
+A static route is a route without variable parameters such as `/foo/bar`.
+
+Static route measures performance by benchmarking routing tests with the following three input values.
+
+- `/`
+- `/foo`
+- `/foo/bar/baz/qux/quux`
+- `/foo/bar/baz/qux/quux/corge/grault/garply/waldo/fred`
+
+## Path parameter route
+A path parameter route is a route with variable parameters such as `/foo/:bar`.
+
+In path parameter route, we perform benchmark routing tests with the following three input values to measure the performance.
+
+- `/foo/:bar`
+- `/foo/:bar/:baz/:qux/:quux/:corge`
+- `/foo/:bar/:baz/:qux/:quux/:corge/:grault/:garply/:waldo/:fred/:plugh`
+
+Since different HTTP Routers have different ways of expressing parameters, there are several cases where another symbol is used in addition to `:`.
+
 # How to run benchmark test
 `make test-benchmark`
 
-## Commands for running benchmark test
-`make test-benchmark`
-
-## Results
+# Results
 ```sh
 go test -bench=. -benchmem
 goos: darwin

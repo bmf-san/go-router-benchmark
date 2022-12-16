@@ -14,6 +14,9 @@ func testServeHTTP(b *testing.B, r route, router http.Handler) {
 		b.Fatal(err)
 	}
 
+	b.ReportAllocs()
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
 		router.ServeHTTP(rec, req)
 		if rec.Code != 200 {
@@ -23,9 +26,6 @@ func testServeHTTP(b *testing.B, r route, router http.Handler) {
 }
 
 func benchmark(b *testing.B, r route, router http.Handler) {
-	b.ReportAllocs()
-	b.ResetTimer()
-
 	testServeHTTP(b, r, router)
 }
 
