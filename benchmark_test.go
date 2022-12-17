@@ -73,19 +73,19 @@ func BenchmarkStaticRoutes10Goblin(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1Goblin(b *testing.B) {
-	router := loadGoblin(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonGoblin(b *testing.B) {
+	router := loadGoblin(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5Goblin(b *testing.B) {
-	router := loadGoblin(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonGoblin(b *testing.B) {
+	router := loadGoblin(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10Goblin(b *testing.B) {
-	router := loadGoblin(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonGoblin(b *testing.B) {
+	router := loadGoblin(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // julienschmidt/httprouter
@@ -110,19 +110,19 @@ func BenchmarkStaticRoutes10HTTPRouter(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1HTTPRouter(b *testing.B) {
-	router := loadHTTPRouter(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonHTTPRouter(b *testing.B) {
+	router := loadHTTPRouter(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5HTTPRouter(b *testing.B) {
-	router := loadHTTPRouter(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonHTTPRouter(b *testing.B) {
+	router := loadHTTPRouter(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10HTTPRouter(b *testing.B) {
-	router := loadHTTPRouter(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonHTTPRouter(b *testing.B) {
+	router := loadHTTPRouter(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // go-chi/chi
@@ -147,19 +147,19 @@ func BenchmarkStaticRoutes10Chi(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamBracketRoutes1Chi(b *testing.B) {
-	router := loadChi(pathParamBracketRoutes1)
-	benchmark(b, pathParamBracketRoutes1, router)
+func BenchmarkPathParamRoutes1BracketChi(b *testing.B) {
+	router := loadChi(pathParamRoutes1Bracket)
+	benchmark(b, pathParamRoutes1Bracket, router)
 }
 
-func BenchmarkPathParamBracketRoutes5Chi(b *testing.B) {
-	router := loadChi(pathParamBracketRoutes5)
-	benchmark(b, pathParamBracketRoutes5, router)
+func BenchmarkPathParamRoutes5BracketChi(b *testing.B) {
+	router := loadChi(pathParamRoutes5Bracket)
+	benchmark(b, pathParamRoutes5Bracket, router)
 }
 
-func BenchmarkPathParamBracketRoutes10Chi(b *testing.B) {
-	router := loadChi(pathParamBracketRoutes10)
-	benchmark(b, pathParamBracketRoutes10, router)
+func BenchmarkPathParamRoutes10BracketChi(b *testing.B) {
+	router := loadChi(pathParamRoutes10Bracket)
+	benchmark(b, pathParamRoutes10Bracket, router)
 }
 
 // gin-gonic/gin
@@ -184,19 +184,19 @@ func BenchmarkStaticRoutes10Gin(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1Gin(b *testing.B) {
-	router := loadGin(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonGin(b *testing.B) {
+	router := loadGin(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5Gin(b *testing.B) {
-	router := loadGin(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonGin(b *testing.B) {
+	router := loadGin(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10Gin(b *testing.B) {
-	router := loadGin(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonGin(b *testing.B) {
+	router := loadGin(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // uptrace/bunrouter
@@ -221,19 +221,19 @@ func BenchmarkStaticRoutes10BunRouter(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1BunRouter(b *testing.B) {
-	router := loadBunRouter(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonBunRouter(b *testing.B) {
+	router := loadBunRouter(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5BunRouter(b *testing.B) {
-	router := loadBunRouter(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonBunRouter(b *testing.B) {
+	router := loadBunRouter(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10BunRouter(b *testing.B) {
-	router := loadBunRouter(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonBunRouter(b *testing.B) {
+	router := loadBunRouter(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // dimfeld/httptreemux
@@ -258,19 +258,19 @@ func BenchmarkStaticRoutes10HTTPTreeMux(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1HTTPTreeMux(b *testing.B) {
-	router := loadHTTPTreeMux(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonHTTPTreeMux(b *testing.B) {
+	router := loadHTTPTreeMux(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5HTTPTreeMux(b *testing.B) {
-	router := loadHTTPTreeMux(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonHTTPTreeMux(b *testing.B) {
+	router := loadHTTPTreeMux(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10HTTPTreeMux(b *testing.B) {
-	router := loadHTTPTreeMux(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonHTTPTreeMux(b *testing.B) {
+	router := loadHTTPTreeMux(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // beego/mux
@@ -295,19 +295,19 @@ func BenchmarkStaticRoutes10BeegoMux(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1BeegoMux(b *testing.B) {
-	router := loadBeegoMux(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonBeegoMux(b *testing.B) {
+	router := loadBeegoMux(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5BeegoMux(b *testing.B) {
-	router := loadBeegoMux(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonBeegoMux(b *testing.B) {
+	router := loadBeegoMux(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10BeegoMux(b *testing.B) {
-	router := loadBeegoMux(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonBeegoMux(b *testing.B) {
+	router := loadBeegoMux(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // gorilla/mux
@@ -332,19 +332,19 @@ func BenchmarkStaticRoutes10GorillaMux(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamBracketRoutes1GorillaMux(b *testing.B) {
-	router := loadGorillaMux(pathParamBracketRoutes1)
-	benchmark(b, pathParamBracketRoutes1, router)
+func BenchmarkPathParamRoutes1BracketGorillaMux(b *testing.B) {
+	router := loadGorillaMux(pathParamRoutes1Bracket)
+	benchmark(b, pathParamRoutes1Bracket, router)
 }
 
-func BenchmarkPathParamBracketRoutes5GorillaMux(b *testing.B) {
-	router := loadGorillaMux(pathParamBracketRoutes5)
-	benchmark(b, pathParamBracketRoutes5, router)
+func BenchmarkPathParamRoutes5BracketGorillaMux(b *testing.B) {
+	router := loadGorillaMux(pathParamRoutes5Bracket)
+	benchmark(b, pathParamRoutes5Bracket, router)
 }
 
-func BenchmarkPathParamBracketRoutes10GorillaMux(b *testing.B) {
-	router := loadGorillaMux(pathParamBracketRoutes10)
-	benchmark(b, pathParamBracketRoutes10, router)
+func BenchmarkPathParamRoutes10BracketGorillaMux(b *testing.B) {
+	router := loadGorillaMux(pathParamRoutes10Bracket)
+	benchmark(b, pathParamRoutes10Bracket, router)
 }
 
 // nissy/bon
@@ -369,19 +369,19 @@ func BenchmarkStaticRoutes10Bon(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1Bon(b *testing.B) {
-	router := loadBon(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonBon(b *testing.B) {
+	router := loadBon(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5Bon(b *testing.B) {
-	router := loadBon(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonBon(b *testing.B) {
+	router := loadBon(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10Bon(b *testing.B) {
-	router := loadBon(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonBon(b *testing.B) {
+	router := loadBon(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // naoina/denco
@@ -406,19 +406,19 @@ func BenchmarkStaticRoutes10Denco(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1Denco(b *testing.B) {
-	router := loadDenco(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonDenco(b *testing.B) {
+	router := loadDenco(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5Denco(b *testing.B) {
-	router := loadDenco(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonDenco(b *testing.B) {
+	router := loadDenco(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10Denco(b *testing.B) {
-	router := loadDenco(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonDenco(b *testing.B) {
+	router := loadDenco(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // labstack/echo
@@ -443,19 +443,19 @@ func BenchmarkStaticRoutes10Echo(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1Echo(b *testing.B) {
-	router := loadEcho(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonEcho(b *testing.B) {
+	router := loadEcho(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5Echo(b *testing.B) {
-	router := loadEcho(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonEcho(b *testing.B) {
+	router := loadEcho(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10Echo(b *testing.B) {
-	router := loadEcho(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonEcho(b *testing.B) {
+	router := loadEcho(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // gocraft/web
@@ -480,19 +480,19 @@ func BenchmarkStaticRoutes10GocraftWeb(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamColonRoutes1GocraftWeb(b *testing.B) {
-	router := loadGocraftWeb(pathParamColonRoutes1)
-	benchmark(b, pathParamColonRoutes1, router)
+func BenchmarkPathParamRoutes1ColonGocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(pathParamRoutes1Colon)
+	benchmark(b, pathParamRoutes1Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes5GocraftWeb(b *testing.B) {
-	router := loadGocraftWeb(pathParamColonRoutes5)
-	benchmark(b, pathParamColonRoutes5, router)
+func BenchmarkPathParamRoutes5ColonGocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(pathParamRoutes5Colon)
+	benchmark(b, pathParamRoutes5Colon, router)
 }
 
-func BenchmarkPathParamColonRoutes10GocraftWeb(b *testing.B) {
-	router := loadGocraftWeb(pathParamColonRoutes10)
-	benchmark(b, pathParamColonRoutes10, router)
+func BenchmarkPathParamRoutes10ColonGocraftWeb(b *testing.B) {
+	router := loadGocraftWeb(pathParamRoutes10Colon)
+	benchmark(b, pathParamRoutes10Colon, router)
 }
 
 // vardius/gorouter
@@ -517,19 +517,19 @@ func BenchmarkStaticRoutes10Gorouter(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamBracketRoutes1Gorouter(b *testing.B) {
-	router := loadGorouter(pathParamBracketRoutes1)
-	benchmark(b, pathParamBracketRoutes1, router)
+func BenchmarkPathParamRoutes1BracketGorouter(b *testing.B) {
+	router := loadGorouter(pathParamRoutes1Bracket)
+	benchmark(b, pathParamRoutes1Bracket, router)
 }
 
-func BenchmarkPathParamBracketRoutes5Gorouter(b *testing.B) {
-	router := loadGorouter(pathParamBracketRoutes5)
-	benchmark(b, pathParamBracketRoutes5, router)
+func BenchmarkPathParamRoutes5BracketGorouter(b *testing.B) {
+	router := loadGorouter(pathParamRoutes5Bracket)
+	benchmark(b, pathParamRoutes5Bracket, router)
 }
 
-func BenchmarkPathParamBracketRoutes10Gorouter(b *testing.B) {
-	router := loadGorouter(pathParamBracketRoutes10)
-	benchmark(b, pathParamBracketRoutes10, router)
+func BenchmarkPathParamRoutes10BracketGorouter(b *testing.B) {
+	router := loadGorouter(pathParamRoutes10Bracket)
+	benchmark(b, pathParamRoutes10Bracket, router)
 }
 
 // go-ozzo/ozzo-routing
@@ -554,19 +554,19 @@ func BenchmarkStaticRoutes10OzzoRouting(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamInequalitySignRoutes1OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(pathParamInequalitySignRoutes1)
-	benchmark(b, pathParamInequalitySignRoutes1, router)
+func BenchmarkPathParamRoutes1InequalitySignOzzoRouting(b *testing.B) {
+	router := loadOzzoRouting(pathParamRoutes1InequalitySign)
+	benchmark(b, pathParamRoutes1InequalitySign, router)
 }
 
-func BenchmarkPathParamInequalitySignRoutes5OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(pathParamInequalitySignRoutes5)
-	benchmark(b, pathParamInequalitySignRoutes5, router)
+func BenchmarkPathParamRoutes5InequalitySignOzzoRouting(b *testing.B) {
+	router := loadOzzoRouting(pathParamRoutes5InequalitySign)
+	benchmark(b, pathParamRoutes5InequalitySign, router)
 }
 
-func BenchmarkPathParamInequalitySignRoutes10OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(pathParamInequalitySignRoutes10)
-	benchmark(b, pathParamInequalitySignRoutes10, router)
+func BenchmarkPathParamRoutes10InequalitySignOzzoRouting(b *testing.B) {
+	router := loadOzzoRouting(pathParamRoutes10InequalitySign)
+	benchmark(b, pathParamRoutes10InequalitySign, router)
 }
 
 // n9te9 router

@@ -1,0 +1,15 @@
+BenchmarkStaticRoutes5ServeMux-8,96.20
+BenchmarkStaticRoutes5Goblin-8,201.9
+BenchmarkStaticRoutes5HTTPRouter-8,12.99
+BenchmarkStaticRoutes5Chi-8,248.3
+BenchmarkStaticRoutes5Gin-8,35.77
+BenchmarkStaticRoutes5BunRouter-8,22.03
+BenchmarkStaticRoutes5HTTPTreeMux-8,239.6
+BenchmarkStaticRoutes5BeegoMux-8,1086
+BenchmarkStaticRoutes5GorillaMux-8,642.5
+BenchmarkStaticRoutes5Bon-8,15.85
+BenchmarkStaticRoutes5Denco-8,16.77
+BenchmarkStaticRoutes5Echo-8,49.97
+BenchmarkStaticRoutes5GocraftWeb-8,1168
+BenchmarkStaticRoutes5Gorouter-8,75.96
+BenchmarkStaticRoutes5OzzoRouting-8,47.33

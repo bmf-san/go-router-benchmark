@@ -1,0 +1,14 @@
+BenchmarkPathParamRoutes1ColonGoblin-8,409
+BenchmarkPathParamRoutes1ColonHTTPRouter-8,32
+BenchmarkPathParamRoutes1BracketChi-8,304
+BenchmarkPathParamRoutes1ColonGin-8,0
+BenchmarkPathParamRoutes1ColonBunRouter-8,0
+BenchmarkPathParamRoutes1ColonHTTPTreeMux-8,680
+BenchmarkPathParamRoutes1ColonBeegoMux-8,672
+BenchmarkPathParamRoutes1BracketGorillaMux-8,1024
+BenchmarkPathParamRoutes1ColonBon-8,304
+BenchmarkPathParamRoutes1ColonDenco-8,32
+BenchmarkPathParamRoutes1ColonEcho-8,0
+BenchmarkPathParamRoutes1ColonGocraftWeb-8,656
+BenchmarkPathParamRoutes1BracketGorouter-8,360
+BenchmarkPathParamRoutes1InequalitySignOzzoRouting-8,0
