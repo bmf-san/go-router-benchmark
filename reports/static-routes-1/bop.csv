@@ -13,3 +13,4 @@ BenchmarkStaticRoutes1Echo-8,0
 BenchmarkStaticRoutes1GocraftWeb-8,288
 BenchmarkStaticRoutes1Gorouter-8,0
 BenchmarkStaticRoutes1OzzoRouting-8,0
+BenchmarkStaticRoutes1ON9tE9Routing-8,308

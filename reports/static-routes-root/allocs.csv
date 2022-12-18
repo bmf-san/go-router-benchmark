@@ -13,3 +13,4 @@ BenchmarkStaticRoutesRootEcho-8,0
 BenchmarkStaticRoutesRootGocraftWeb-8,6
 BenchmarkStaticRoutesRootGorouter-8,0
 BenchmarkStaticRoutesRootOzzoRouting-8,0
+BenchmarkStaticRoutesRootN9tE9Routing-8,2

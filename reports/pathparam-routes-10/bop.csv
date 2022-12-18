@@ -1,4 +1,4 @@
-BenchmarkPathParamRoutes10ColonGoblin-8,1607
+BenchmarkPathParamRoutes10ColonGoblin-8,1609
 BenchmarkPathParamRoutes10ColonHTTPRouter-8,320
 BenchmarkPathParamRoutes10BracketChi-8,304
 BenchmarkPathParamRoutes10ColonGin-8,0
@@ -12,3 +12,4 @@ BenchmarkPathParamRoutes10ColonEcho-8,0
 BenchmarkPathParamRoutes10ColonGocraftWeb-8,1862
 BenchmarkPathParamRoutes10BracketGorouter-8,648
 BenchmarkPathParamRoutes10InequalitySignOzzoRouting-8,0
+BenchmarkPathParamRoutes10ColonN9tE9Routing-8,1792

@@ -12,3 +12,4 @@ BenchmarkPathParamRoutes10ColonEcho-8,0
 BenchmarkPathParamRoutes10ColonGocraftWeb-8,14
 BenchmarkPathParamRoutes10BracketGorouter-8,4
 BenchmarkPathParamRoutes10InequalitySignOzzoRouting-8,0
+BenchmarkPathParamRoutes10ColonN9tE9Routing-8,59
