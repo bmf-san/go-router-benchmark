@@ -1,4 +1,4 @@
-BenchmarkPathParamRoutes10ColonGoblin-8,1609
+BenchmarkPathParamRoutes10ColonGoblin-8,1608
 BenchmarkPathParamRoutes10ColonHTTPRouter-8,320
 BenchmarkPathParamRoutes10BracketChi-8,304
 BenchmarkPathParamRoutes10ColonGin-8,0
