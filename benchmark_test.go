@@ -593,15 +593,15 @@ func BenchmarkStaticRoutes10N9tE9Routing(b *testing.B) {
 
 func BenchmarkPathParamColonRoutes1N9tE9Routing(b *testing.B) {
 	router := loadN9tE9Routing(pathParamColonRoutes1)
-	benchmark(b, pathParamInequalitySignRoutes1, router)
+	benchmark(b, pathParamColonRoutes1, router)
 }
 
 func BenchmarkPathParamColonRoutes5N9tE9Routing(b *testing.B) {
 	router := loadN9tE9Routing(pathParamColonRoutes5)
-	benchmark(b, pathParamInequalitySignRoutes5, router)
+	benchmark(b, pathParamColonRoutes5, router)
 }
 
 func BenchmarkPathParamColonRoutes10N9tE9Routing(b *testing.B) {
 	router := loadN9tE9Routing(pathParamColonRoutes10)
-	benchmark(b, pathParamInequalitySignRoutes10, router)
+	benchmark(b, pathParamColonRoutes10, router)
 }
