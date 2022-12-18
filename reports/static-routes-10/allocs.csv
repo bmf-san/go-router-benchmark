@@ -1,0 +1,16 @@
+BenchmarkStaticRoutes10ServeMux-8,0
+BenchmarkStaticRoutes10Goblin-8,1
+BenchmarkStaticRoutes10HTTPRouter-8,0
+BenchmarkStaticRoutes10Chi-8,2
+BenchmarkStaticRoutes10Gin-8,0
+BenchmarkStaticRoutes10BunRouter-8,0
+BenchmarkStaticRoutes10HTTPTreeMux-8,3
+BenchmarkStaticRoutes10BeegoMux-8,1
+BenchmarkStaticRoutes10GorillaMux-8,7
+BenchmarkStaticRoutes10Bon-8,0
+BenchmarkStaticRoutes10Denco-8,0
+BenchmarkStaticRoutes10Echo-8,0
+BenchmarkStaticRoutes10GocraftWeb-8,6
+BenchmarkStaticRoutes10Gorouter-8,0
+BenchmarkStaticRoutes10OzzoRouting-8,0
+BenchmarkStaticRoutes10N9tE9Routing-8,21

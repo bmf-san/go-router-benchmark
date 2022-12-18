@@ -16,6 +16,7 @@ Compare the performance of routers built with golang.
 - [gocraft/web](https://github.com/gocraft/web)
 - [vardius/gorouter](https://github.com/vardius/gorouter)
 - [go-ozzo/ozzo-routing](https://github.com/go-ozzo/ozzo-routing)
+- [lkeix/techbook13-sample](https://github.com/lkeix/techbook13-sample)
 
 Since [net/http#ServeMux](https://pkg.go.dev/net/http#ServeMux) does not have the capability to support path param route, only the static route test case is comparable.
 
@@ -82,128 +83,247 @@ In path parameter route, we perform benchmark routing tests with the following t
 
 Since different HTTP Routers have different ways of expressing parameters, there are several cases where another symbol is used in addition to `:`.
 
-# How to run benchmark test
-`make test-benchmark`
+# Run benchmark tests
+|         Command          |                                                          Description                                                          |
+| :----------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| test-benchmark           | Run benchmark tests.                                                                                                          |
+| test-benchmark-static    | Run benchmark tests only static.                                                                                              |
+| test-benchmark-pathparam | Run benchmark tests only pathparam.                                                                                           |
+| test-benchmark-by-regexp | Run benchmark tests using regexp. ex. make test-benchmark-by-regexp EXP=Goblin, make test-benchmark-by-name EXP=StaticRoutes1 |
 
 # Results
-```sh
-go test -bench=. -benchmem
-goos: darwin
-goarch: amd64
-pkg: github.com/go-router-benchmark
-cpu: VirtualApple @ 2.50GHz
-BenchmarkStaticRoutesRootServeMux-8                             23305570                50.96 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1ServeMux-8                                21346630                56.29 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5ServeMux-8                                13507384                88.60 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes10ServeMux-8                                8871856               135.2 ns/op             0 B/op          0 allocs/op
-BenchmarkStaticRoutesRootGoblin-8                               31467156                37.69 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Goblin-8                                  16274073                71.43 ns/op           16 B/op          1 allocs/op
-BenchmarkStaticRoutes5Goblin-8                                   5900212               203.9 ns/op            80 B/op          1 allocs/op
-BenchmarkStaticRoutes10Goblin-8                                  3205656               374.0 ns/op           160 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes1Goblin-8                           1936185               619.5 ns/op           408 B/op          6 allocs/op
-BenchmarkPathParamColonRoutes5Goblin-8                            520683              2237 ns/op             964 B/op         13 allocs/op
-BenchmarkPathParamColonRoutes10Goblin-8                           276434              4292 ns/op            1611 B/op         19 allocs/op
-BenchmarkStaticRoutesRootHTTPRouter-8                           79534504                13.29 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1HTTPRouter-8                              79775299                13.40 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5HTTPRouter-8                              79895688                13.38 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes10HTTPRouter-8                             80145372                13.40 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1HTTPRouter-8                      24690871                46.86 ns/op           32 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes5HTTPRouter-8                       9880882               119.9 ns/op           160 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes10HTTPRouter-8                      5949777               200.5 ns/op           320 B/op          1 allocs/op
-BenchmarkStaticRoutesRootChi-8                                   5480019               216.8 ns/op           304 B/op          2 allocs/op
-BenchmarkStaticRoutes1Chi-8                                      5508302               214.6 ns/op           304 B/op          2 allocs/op
-BenchmarkStaticRoutes5Chi-8                                      5643144               211.5 ns/op           304 B/op          2 allocs/op
-BenchmarkStaticRoutes10Chi-8                                     5650141               212.2 ns/op           304 B/op          2 allocs/op
-BenchmarkPathParamBracketRoutes1Chi-8                            4443690               269.6 ns/op           304 B/op          2 allocs/op
-BenchmarkPathParamBracketRoutes5Chi-8                            2747660               443.0 ns/op           304 B/op          2 allocs/op
-BenchmarkPathParamBracketRoutes10Chi-8                           1867706               639.0 ns/op           304 B/op          2 allocs/op
-BenchmarkStaticRoutesRootGin-8                                  33840350                35.03 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Gin-8                                     33891363                34.97 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Gin-8                                     33447457                35.87 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Gin-8                                    32442332                36.17 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1Gin-8                             28137997                40.66 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes5Gin-8                             15604334                76.89 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes10Gin-8                             9713322               123.6 ns/op             0 B/op          0 allocs/op
-BenchmarkStaticRoutesRootBunRouter-8                            62378167                19.04 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1BunRouter-8                               54281038                21.52 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5BunRouter-8                               54312976                21.70 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes10BunRouter-8                              54036307                21.85 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1BunRouter-8                       36516248                32.37 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes5BunRouter-8                        8669384               138.0 ns/op             0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes10BunRouter-8                       4173550               284.7 ns/op             0 B/op          0 allocs/op
-BenchmarkStaticRoutesRootHTTPTreeMux-8                           6744598               179.6 ns/op           328 B/op          3 allocs/op
-BenchmarkStaticRoutes1HTTPTreeMux-8                              6489350               180.7 ns/op           328 B/op          3 allocs/op
-BenchmarkStaticRoutes5HTTPTreeMux-8                              5359826               234.5 ns/op           328 B/op          3 allocs/op
-BenchmarkStaticRoutes10HTTPTreeMux-8                             4188642               286.9 ns/op           328 B/op          3 allocs/op
-BenchmarkPathParamColonRoutes1HTTPTreeMux-8                      3014743               378.0 ns/op           680 B/op          6 allocs/op
-BenchmarkPathParamColonRoutes5HTTPTreeMux-8                      1498790               787.8 ns/op           904 B/op          9 allocs/op
-BenchmarkPathParamColonRoutes10HTTPTreeMux-8                      805834              1450 ns/op            1742 B/op         11 allocs/op
-BenchmarkStaticRoutesRootBeegoMux-8                             23302629                50.27 ns/op           32 B/op          1 allocs/op
-BenchmarkStaticRoutes1BeegoMux-8                                16677880                71.03 ns/op           32 B/op          1 allocs/op
-BenchmarkStaticRoutes5BeegoMux-8                                 1000000              1077 ns/op              32 B/op          1 allocs/op
-BenchmarkStaticRoutes10BeegoMux-8                                 577743              2026 ns/op              32 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes1BeegoMux-8                         3329392               366.7 ns/op           672 B/op          5 allocs/op
-BenchmarkPathParamColonRoutes5BeegoMux-8                          813811              1439 ns/op             672 B/op          5 allocs/op
-BenchmarkPathParamColonRoutes10BeegoMux-8                         344250              3417 ns/op            1254 B/op          6 allocs/op
-BenchmarkStaticRoutesRootGorillaMux-8                            2082201               571.2 ns/op           720 B/op          7 allocs/op
-BenchmarkStaticRoutes1GorillaMux-8                               2088121               575.9 ns/op           720 B/op          7 allocs/op
-BenchmarkStaticRoutes5GorillaMux-8                               1977076               612.0 ns/op           720 B/op          7 allocs/op
-BenchmarkStaticRoutes10GorillaMux-8                              1843194               648.8 ns/op           720 B/op          7 allocs/op
-BenchmarkPathParamBracketRoutes1GorillaMux-8                     1366618               874.8 ns/op          1024 B/op          8 allocs/op
-BenchmarkPathParamBracketRoutes5GorillaMux-8                      516780              2217 ns/op            1088 B/op          8 allocs/op
-BenchmarkPathParamBracketRoutes10GorillaMux-8                     242192              4879 ns/op            1751 B/op          9 allocs/op
-BenchmarkStaticRoutesRootBon-8                                  84426278                13.91 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Bon-8                                     84835378                13.92 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Bon-8                                     84868131                13.90 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Bon-8                                    81009922                14.74 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1Bon-8                              6376364               186.0 ns/op           304 B/op          2 allocs/op
-BenchmarkPathParamColonRoutes5Bon-8                              4626661               258.9 ns/op           304 B/op          2 allocs/op
-BenchmarkPathParamColonRoutes10Bon-8                             3383512               354.7 ns/op           304 B/op          2 allocs/op
-BenchmarkStaticRoutesRootDenco-8                                86391010                13.73 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Denco-8                                   86784367                13.73 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Denco-8                                   86470388                13.72 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Denco-8                                  86911906                13.72 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1Denco-8                           19862026                59.49 ns/op           32 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes5Denco-8                            8485465               141.3 ns/op           160 B/op          1 allocs/op
-BenchmarkPathParamColonRoutes10Denco-8                           5047719               237.2 ns/op           320 B/op          1 allocs/op
-BenchmarkStaticRoutesRootEcho-8                                 41954373                28.08 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Echo-8                                    36967816                32.18 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Echo-8                                    23895873                49.96 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Echo-8                                   12395061                96.61 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes1Echo-8                            30886804                39.32 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes5Echo-8                            12091669                98.75 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamColonRoutes10Echo-8                            6830480               176.0 ns/op             0 B/op          0 allocs/op
-BenchmarkStaticRoutesRootGocraftWeb-8                            1259409               943.2 ns/op           288 B/op          6 allocs/op
-BenchmarkStaticRoutes1GocraftWeb-8                               1252980               955.4 ns/op           288 B/op          6 allocs/op
-BenchmarkStaticRoutes5GocraftWeb-8                               1000000              1107 ns/op             352 B/op          6 allocs/op
-BenchmarkStaticRoutes10GocraftWeb-8                               935240              1217 ns/op             432 B/op          6 allocs/op
-BenchmarkPathParamColonRoutes1GocraftWeb-8                        966060              1165 ns/op             656 B/op          9 allocs/op
-BenchmarkPathParamColonRoutes5GocraftWeb-8                        756178              1545 ns/op             944 B/op         12 allocs/op
-BenchmarkPathParamColonRoutes10GocraftWeb-8                       518744              2281 ns/op            1862 B/op         14 allocs/op
-BenchmarkStaticRoutesRootGorouter-8                             23695804                50.08 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1Gorouter-8                                26121121                44.53 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5Gorouter-8                                11303084               102.8 ns/op             0 B/op          0 allocs/op
-BenchmarkStaticRoutes10Gorouter-8                                7328988               163.8 ns/op             0 B/op          0 allocs/op
-BenchmarkPathParamBracketRoutes1Gorouter-8                       4579246               267.3 ns/op           360 B/op          4 allocs/op
-BenchmarkPathParamBracketRoutes5Gorouter-8                       2987978               426.6 ns/op           488 B/op          4 allocs/op
-BenchmarkPathParamBracketRoutes10Gorouter-8                      2060394               550.8 ns/op           648 B/op          4 allocs/op
-BenchmarkStaticRoutesRootOzzoRouting-8                          28247007                41.33 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes1OzzoRouting-8                             28425942                42.13 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes5OzzoRouting-8                             23588305                50.34 ns/op            0 B/op          0 allocs/op
-BenchmarkStaticRoutes10OzzoRouting-8                            18309638                65.64 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamInequalitySignRoutes1OzzoRouting-8            23027325                51.88 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamInequalitySignRoutes5OzzoRouting-8            11985876                99.66 ns/op            0 B/op          0 allocs/op
-BenchmarkPathParamInequalitySignRoutes10OzzoRouting-8            7554290               159.3 ns/op             0 B/op          0 allocs/op
-PASS
-ok      github.com/go-router-benchmark  140.014s
-```
+Benchmark results are published in a spreadsheet.
+
+[<Public>go-router-benchmark](https://docs.google.com/spreadsheets/d/1DrDNGJXfquw_PED3-eMqWqh7qbCTVBWZtqaKPXtngxg/edit#gid=1913830192)
+
+Benchmark system
+- go version: go1.19
+- goos: darwin
+- goarch: amd64
+- pkg: github.com/go-router-benchmark
+- cpu: VirtualApple @ 2.50GHz
+
+## Static routes
+### time
+|       time        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| ----------------- | ------------------ | --------------- | --------------- | ---------------- |
+| servemux          | 24301910           | 22053468        | 13324357        | 8851803          |
+| goblin            | 32296879           | 16738813        | 5753088         | 3111172          |
+| httprouter        | 100000000          | 100000000       | 100000000       | 72498970         |
+| chi               | 5396652            | 5350285         | 5353856         | 5415325          |
+| gin               | 34933861           | 34088810        | 34136852        | 33966028         |
+| bunrouter         | 63478486           | 54812665        | 53564055        | 54345159         |
+| httptreemux       | 6669231            | 6219157         | 5278312         | 4300488          |
+| beegomux          | 22320199           | 15369320        | 1000000         | 577272           |
+| gorillamux        | 1807042            | 2104210         | 1904696         | 1869037          |
+| bon               | 72425132           | 56830177        | 59573305        | 58364338         |
+| denco             | 90249313           | 92561344        | 89325312        | 73905086         |
+| echo              | 41742093           | 36207878        | 23962478        | 12379764         |
+| gocraftweb        | 1284613            | 1262863         | 1000000         | 889360           |
+| gorouter          | 21622920           | 28592134        | 15582778        | 9636147          |
+| ozzorouting       | 31406931           | 34989970        | 24825552        | 19431296         |
+| techbook13-sample | 8176849            | 6349896         | 2684418         | 1384840          |
+
+![time.png](/images/static-routes/time.png)
+
+[Graph - time](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=800028423&format=interactive)
+
+### nsop
+|       nsop        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| ----------------- | ------------------ | --------------- | --------------- | ---------------- |
+| servemux          | 50.44              | 54.97           | 89.81           | 135.2            |
+| goblin            | 36.63              | 69.9            | 205.2           | 382.7            |
+| httprouter        | 10.65              | 10.74           | 10.75           | 16.42            |
+| chi               | 217.2              | 220.1           | 216.7           | 221.5            |
+| gin               | 34.53              | 34.91           | 34.69           | 35.04            |
+| bunrouter         | 18.77              | 21.78           | 22.41           | 22               |
+| httptreemux       | 178.8              | 190.9           | 227.2           | 277.7            |
+| beegomux          | 55.07              | 74.69           | 1080            | 2046             |
+| gorillamux        | 595.7              | 572.8           | 626.5           | 643.3            |
+| bon               | 15.75              | 20.17           | 18.87           | 19.16            |
+| denco             | 14                 | 13.03           | 13.4            | 15.87            |
+| echo              | 28.17              | 32.83           | 49.82           | 96.77            |
+| gocraftweb        | 929.4              | 948.8           | 1078            | 1215             |
+| gorouter          | 55.16              | 37.64           | 76.6            | 124.1            |
+| ozzorouting       | 42.62              | 34.22           | 48.12           | 61.6             |
+| techbook13-sample | 146.1              | 188.4           | 443.5           | 867.8            |
+
+![nsop.png](/images/static-routes/nsop.png)
+
+[Graph - nsop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1691114342&format=interactive)
+
+### bop
+|        bop        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| ----------------- | ------------------ | --------------- | --------------- | ---------------- |
+| servemux          | 0                  | 0               | 0               | 0                |
+| goblin            | 0                  | 16              | 80              | 160              |
+| httprouter        | 0                  | 0               | 0               | 0                |
+| chi               | 304                | 304             | 304             | 304              |
+| gin               | 0                  | 0               | 0               | 0                |
+| bunrouter         | 0                  | 0               | 0               | 0                |
+| httptreemux       | 328                | 328             | 328             | 328              |
+| beegomux          | 32                 | 32              | 32              | 32               |
+| gorillamux        | 720                | 720             | 720             | 720              |
+| bon               | 0                  | 0               | 0               | 0                |
+| denco             | 0                  | 0               | 0               | 0                |
+| echo              | 0                  | 0               | 0               | 0                |
+| gocraftweb        | 288                | 288             | 352             | 432              |
+| gorouter          | 0                  | 0               | 0               | 0                |
+| ozzorouting       | 0                  | 0               | 0               | 0                |
+| techbook13-sample | 304                | 308             | 432             | 872              |
+
+![bop.png](/images/static-routes/bop.png)
+
+[Graph - bop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=675738282&format=interactive)
+
+### allocs
+|      allocs       | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| ----------------- | ------------------ | --------------- | --------------- | ---------------- |
+| servemux          | 0                  | 0               | 0               | 0                |
+| goblin            | 0                  | 1               | 1               | 1                |
+| httprouter        | 0                  | 0               | 0               | 0                |
+| chi               | 2                  | 2               | 2               | 2                |
+| gin               | 0                  | 0               | 0               | 0                |
+| bunrouter         | 0                  | 0               | 0               | 0                |
+| httptreemux       | 3                  | 3               | 3               | 3                |
+| beegomux          | 1                  | 1               | 1               | 1                |
+| gorillamux        | 7                  | 7               | 7               | 7                |
+| bon               | 0                  | 0               | 0               | 0                |
+| denco             | 0                  | 0               | 0               | 0                |
+| echo              | 0                  | 0               | 0               | 0                |
+| gocraftweb        | 6                  | 6               | 6               | 6                |
+| gorouter          | 0                  | 0               | 0               | 0                |
+| ozzorouting       | 0                  | 0               | 0               | 0                |
+| techbook13-sample | 2                  | 3               | 11              | 21               |
+
+![allocs.png](/images/static-routes/allocs.png)
+
+[Graph - allocs](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1054975173&format=interactive)
+
+## Pathparams routes
+### time
+|       time        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| ----------------- | ------------------ | ------------------ | ------------------- |
+| goblin            | 1802690            | 492392             | 252274              |
+| httprouter        | 25775940           | 10057874           | 6060843             |
+| chi               | 4337922            | 2687157            | 1772881             |
+| gin               | 29479381           | 15714673           | 9586220             |
+| bunrouter         | 37098772           | 8479642            | 3747968             |
+| httptreemux       | 2610324            | 1550306            | 706356              |
+| beegomux          | 3177818            | 797472             | 343969              |
+| gorillamux        | 1364386            | 470180             | 223627              |
+| bon               | 6639216            | 4486780            | 3285571             |
+| denco             | 20093167           | 8503317            | 4988640             |
+| echo              | 30667137           | 12028713           | 6721176             |
+| gocraftweb        | 921375             | 734821             | 466641              |
+| gorouter          | 4678617            | 3038450            | 2136946             |
+| ozzorouting       | 27126000           | 12228037           | 7923040             |
+| techbook13-sample | 3019774            | 917042             | 522897              |
+
+![time.png](/images/pathparam-routes/time.png)
+
+[Graph - time](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1039813866&format=interactive)
+
+### nsop
+|       nsop        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| ----------------- | ------------------ | ------------------ | ------------------- |
+| goblin            | 652.4              | 2341               | 4504                |
+| httprouter        | 45.73              | 117.4              | 204.2               |
+| chi               | 276.4              | 442.8              | 677.6               |
+| gin               | 40.21              | 76.39              | 124.3               |
+| bunrouter         | 32.52              | 141.1              | 317.2               |
+| httptreemux       | 399.7              | 778.5              | 1518                |
+| beegomux          | 377.2              | 1446               | 3398                |
+| gorillamux        | 850.3              | 2423               | 5264                |
+| bon               | 186.5              | 269.6              | 364.4               |
+| denco             | 60.47              | 139.4              | 238.7               |
+| echo              | 39.36              | 99.6               | 175.7               |
+| gocraftweb        | 1181               | 1540               | 2280                |
+| gorouter          | 256.4              | 393                | 557.6               |
+| ozzorouting       | 43.66              | 99.52              | 150.4               |
+| techbook13-sample | 380.7              | 1154               | 2150                |
+
+![nsop.png](/images/pathparam-routes/nsop.png)
+
+[Graph - nsop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1534246873&format=interactive)
+
+### bop
+|        bop        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| ----------------- | ------------------ | ------------------ | ------------------- |
+| goblin            | 409                | 962                | 1608                |
+| httprouter        | 32                 | 160                | 320                 |
+| chi               | 304                | 304                | 304                 |
+| gin               | 0                  | 0                  | 0                   |
+| bunrouter         | 0                  | 0                  | 0                   |
+| httptreemux       | 680                | 904                | 1742                |
+| beegomux          | 672                | 672                | 1254                |
+| gorillamux        | 1024               | 1088               | 1751                |
+| bon               | 304                | 304                | 304                 |
+| denco             | 32                 | 160                | 320                 |
+| echo              | 0                  | 0                  | 0                   |
+| gocraftweb        | 656                | 944                | 1862                |
+| gorouter          | 360                | 488                | 648                 |
+| ozzorouting       | 0                  | 0                  | 0                   |
+| techbook13-sample | 432                | 968                | 1792                |
+
+![bop.png](/images/pathparam-routes/bop.png)
+
+[Graph - bop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=73824357&format=interactive)
+
+### allocs
+|      allocs       | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| ----------------- | ------------------ | ------------------ | ------------------- |
+| goblin            | 6                  | 13                 | 19                  |
+| httprouter        | 1                  | 1                  | 1                   |
+| chi               | 2                  | 2                  | 2                   |
+| gin               | 0                  | 0                  | 0                   |
+| bunrouter         | 0                  | 0                  | 0                   |
+| httptreemux       | 6                  | 9                  | 11                  |
+| beegomux          | 5                  | 5                  | 6                   |
+| gorillamux        | 8                  | 8                  | 9                   |
+| bon               | 2                  | 2                  | 2                   |
+| denco             | 1                  | 1                  | 1                   |
+| echo              | 0                  | 0                  | 0                   |
+| gocraftweb        | 9                  | 12                 | 14                  |
+| gorouter          | 4                  | 4                  | 4                   |
+| ozzorouting       | 0                  | 0                  | 0                   |
+| techbook13-sample | 10                 | 33                 | 59                  |
+
+![allocs.png](/images/pathparam-routes/allocs.png)
+
+[Graph - allocs](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=344550080&format=interactive)
+
+# Conclusion
+It can be seen that the HTTP Router with better performance has less performance degradation in each test case.
+This is a clear trend that shows that the implementation is optimized.
+
+The better performing HTTP Route seems to employ a more sophisticated tree structure.
+Echo,gin,httprouter,bon,chi seem to adopt Radix tree (Patricia trie) and denco double array.
+
+As for my implementation of goblin, it is a proprietary extension of the trie tree, which is not very well optimized, and I could clearly see that its performance is lower than the other HTTP Routers. (I will try my best to improve it...)
+
+I don't think it is reasonable to assume that HTTP Router should not be adopted because of its seemingly poor performance in this benchmark result.
+
+Some HTTP Routers are considered to be highly functional and easy to use, even if their performance is a little lower.
+
+Some of the HTTP Routers listed here are no longer under development.
+
+Since goblin has no plans to stop development for the time being, please try it if you like!
 
 # Contribution
 We are always accepting issues, pull requests, and other requests and questions.
 
 We look forward to your contribution！
 
+## Want to add an HTTP Router ?
 If you have an HTTP Router or test case you would like to add, please send us an Issue or Pull Request.
+
+If you are submitting an Issue, please tell us about the HTTP Router you would like to add.
+
+If you are submitting a PullRequest, please add a test case.
+Reporting of benchmark runs is done by the owner, so you do not need to update the run results.
+
+If you have any questions, you can ask them in Issue.
 
 # License
 This project is licensed under the terms of the MIT license.
