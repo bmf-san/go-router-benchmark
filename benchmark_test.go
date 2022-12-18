@@ -532,39 +532,39 @@ func BenchmarkPathParamBracketRoutes10Gorouter(b *testing.B) {
 	benchmark(b, pathParamBracketRoutes10, router)
 }
 
-// go-ozzo/ozzo-routing
-// https://github.com/go-ozzo/ozzo-routing
-func BenchmarkStaticRoutesRootOzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(staticRoutesRoot)
+// n9te9 router
+// https://github.com/lkeix/techbook13-sample
+func BenchmarkStaticRoutesRootN9tE9Routing(b *testing.B) {
+	router := loadN9tE9Routing(staticRoutesRoot)
 	benchmark(b, staticRoutesRoot, router)
 }
 
-func BenchmarkStaticRoutes1OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(staticRoutes1)
+func BenchmarkStaticRoutes1ON9tE9Routing(b *testing.B) {
+	router := loadN9tE9Routing(staticRoutes1)
 	benchmark(b, staticRoutes1, router)
 }
 
-func BenchmarkStaticRoutes5OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(staticRoutes5)
+func BenchmarkStaticRoutes5ON9tE9Routing(b *testing.B) {
+	router := loadN9tE9Routing(staticRoutes5)
 	benchmark(b, staticRoutes5, router)
 }
 
-func BenchmarkStaticRoutes10OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(staticRoutes10)
+func BenchmarkStaticRoutes10N9tE9Routing(b *testing.B) {
+	router := loadN9tE9Routing(staticRoutes10)
 	benchmark(b, staticRoutes10, router)
 }
 
-func BenchmarkPathParamInequalitySignRoutes1OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(pathParamInequalitySignRoutes1)
+func BenchmarkPathParamColonRoutes1N9tE9Routing(b *testing.B) {
+	router := loadN9tE9Routing(pathParamColonRoutes1)
 	benchmark(b, pathParamInequalitySignRoutes1, router)
 }
 
-func BenchmarkPathParamInequalitySignRoutes5OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(pathParamInequalitySignRoutes5)
+func BenchmarkPathParamColonRoutes5N9tE9Routing(b *testing.B) {
+	router := loadN9tE9Routing(pathParamColonRoutes5)
 	benchmark(b, pathParamInequalitySignRoutes5, router)
 }
 
-func BenchmarkPathParamInequalitySignRoutes10OzzoRouting(b *testing.B) {
-	router := loadOzzoRouting(pathParamInequalitySignRoutes10)
+func BenchmarkPathParamColonRoutes10N9tE9Routing(b *testing.B) {
+	router := loadN9tE9Routing(pathParamColonRoutes10)
 	benchmark(b, pathParamInequalitySignRoutes10, router)
 }

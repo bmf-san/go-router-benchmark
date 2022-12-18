@@ -13,6 +13,7 @@ import (
 	gorillamux "github.com/gorilla/mux"
 	"github.com/julienschmidt/httprouter"
 	"github.com/labstack/echo"
+	"github.com/lkeix/techbook13-sample/router"
 	"github.com/naoina/denco"
 	"github.com/nissy/bon"
 	"github.com/uptrace/bunrouter"
@@ -138,5 +139,12 @@ func loadOzzoRouting(r route) http.Handler {
 	router := ozzorouting.New()
 	handler := func(_ *ozzorouting.Context) error { return nil }
 	router.Get(r.path, handler)
+	return router
+}
+
+func loadN9tE9Routing(r route) http.Handler {
+	router := router.NewRouter()
+	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
+	router.Insert(r.path, handler)
 	return router
 }
