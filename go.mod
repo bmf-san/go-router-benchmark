@@ -13,6 +13,7 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/labstack/echo v3.3.10+incompatible
+	github.com/lkeix/techbook13-sample v0.0.0-20221218104044-fc1348dfcf99
 	github.com/naoina/denco v0.0.0-20180930074809-8475105a6b4c
 	github.com/nissy/bon v1.3.0
 	github.com/uptrace/bunrouter v1.0.19
@@ -31,7 +32,6 @@ require (
 	github.com/klauspost/compress v1.10.11 // indirect
 	github.com/labstack/gommon v0.4.0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
-	github.com/lkeix/techbook13-sample v0.0.0-20221218104044-fc1348dfcf99 // indirect
 	github.com/mattn/go-colorable v0.1.11 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
