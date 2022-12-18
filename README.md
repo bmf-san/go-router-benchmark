@@ -96,6 +96,13 @@ Benchmark results are published in a spreadsheet.
 
 [<Public>go-router-benchmark](https://docs.google.com/spreadsheets/d/1DrDNGJXfquw_PED3-eMqWqh7qbCTVBWZtqaKPXtngxg/edit#gid=1913830192)
 
+Benchmark system
+- go version: go1.19
+- goos: darwin
+- goarch: amd64
+- pkg: github.com/go-router-benchmark
+- cpu: VirtualApple @ 2.50GHz
+
 ## Static routes
 ### time
 |       time        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
