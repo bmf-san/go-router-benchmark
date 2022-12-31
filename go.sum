@@ -4,6 +4,8 @@ github.com/beego/mux v0.0.0-20170807094426-6660b4b5accb h1:axnOt7m6K48TKsOVlimWm
 github.com/beego/mux v0.0.0-20170807094426-6660b4b5accb/go.mod h1:0taFqEAcm55Z4UtLzfKmpPdnLq537xGk/95OF2/0ebQ=
 github.com/bmf-san/goblin v0.0.0-20221113073440-d4f43eb17a34 h1:uNc3TdXtnNT2OKR8vKsIDN+t4aw1/TbS42FMQk+AOc4=
 github.com/bmf-san/goblin v0.0.0-20221113073440-d4f43eb17a34/go.mod h1:/zoFMy/CFURR5N5AHbIwFPf/3fZs3VzovMZKuQ40r2s=
+github.com/bmf-san/goblin v0.0.0-20221231094735-37f4d70c5a1a h1:4QFX6f2qvPY5BXCajhCGr3IddPSWngz0JAYPlHf9xm0=
+github.com/bmf-san/goblin v0.0.0-20221231094735-37f4d70c5a1a/go.mod h1:/zoFMy/CFURR5N5AHbIwFPf/3fZs3VzovMZKuQ40r2s=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
