@@ -1,5 +1,5 @@
 BenchmarkStaticRoutes1ServeMux-8,0
-BenchmarkStaticRoutes1Goblin-8,16
+BenchmarkStaticRoutes1Goblin-8,0
 BenchmarkStaticRoutes1HTTPRouter-8,0
 BenchmarkStaticRoutes1Chi-8,304
 BenchmarkStaticRoutes1Gin-8,0
