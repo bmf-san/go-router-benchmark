@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/beego/mux v0.0.0-20170807094426-6660b4b5accb
-	github.com/bmf-san/goblin v0.0.0-20221231094735-37f4d70c5a1a
+	github.com/bmf-san/goblin v0.0.0-20230108200028-8e15e5c70d92
 	github.com/dimfeld/httptreemux/v5 v5.5.0
 	github.com/gin-gonic/gin v1.8.2
 	github.com/go-chi/chi/v5 v5.0.8
