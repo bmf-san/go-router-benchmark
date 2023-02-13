@@ -16,7 +16,7 @@ require (
 	github.com/lkeix/techbook13-sample v0.0.0-20221218104044-fc1348dfcf99
 	github.com/naoina/denco v0.0.0-20180930074809-8475105a6b4c
 	github.com/nissy/bon v1.3.0
-	github.com/uptrace/bunrouter v1.0.19
+	github.com/uptrace/bunrouter v1.0.20
 	github.com/vardius/gorouter/v4 v4.5.1
 )
 
