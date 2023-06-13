@@ -1,6 +1,34 @@
 # go-router-benchmark
 Compare the performance of routers built with golang.
 
+# Table of contents
+- [go-router-benchmark](#go-router-benchmark)
+- [Table of contents](#table-of-contents)
+- [Listed routers](#listed-routers)
+- [Motivation](#motivation)
+- [Benchmark test](#benchmark-test)
+	- [Static route](#static-route)
+	- [Path parameter route](#path-parameter-route)
+- [Run benchmark tests](#run-benchmark-tests)
+- [Results](#results)
+	- [Static routes](#static-routes)
+		- [time](#time)
+		- [nsop](#nsop)
+		- [bop](#bop)
+		- [allocs](#allocs)
+	- [Pathparams routes](#pathparams-routes)
+		- [time](#time-1)
+		- [nsop](#nsop-1)
+		- [bop](#bop-1)
+		- [allocs](#allocs-1)
+- [Conclusion](#conclusion)
+- [Contribution](#contribution)
+	- [Want to add an HTTP Router ?](#want-to-add-an-http-router-)
+- [Contribution](#contribution-1)
+- [Sponsor](#sponsor)
+- [License](#license)
+	- [Author](#author)
+
 # Listed routers
 - [bmf-san/goblin](https://github.com/bmf-san/goblin)
 - [julienschmidt/httprouter](https://github.com/julienschmidt/httprouter)
@@ -105,96 +133,96 @@ Benchmark system
 
 ## Static routes
 ### time
-| time | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
-| --- | --- | --- | --- | --- |
-| servemux | 32733160 | 31851897 | 13437040 | 7253216 |
-| goblin | 51884132 | 35242333 | 8901708 | 4096243 |
-| httprouter | 145829186 | 134900438 | 129621186 | 100000000 |
-| chi | 7254184 | 7252261 | 7210196 | 7284903 |
-| gin | 42563881 | 41631550 | 41211974 | 40183560 |
-| bunrouter | 100000000 | 70006395 | 68203778 | 64502257 |
-| httptreemux | 8065448 | 7859656 | 6201728 | 4849598 |
-| beegomux | 31691360 | 25884801 | 8645566 | 5056942 |
-| gorillamux | 3162660 | 3094188 | 2834072 | 2450286 |
-| bon | 100000000 | 100000000 | 100000000 | 100000000 |
-| denco | 135744692 | 133846348 | 134140972 | 133246112 |
-| echo | 64909012 | 60949671 | 39699386 | 24012085 |
-| gocraftweb | 1596338 | 1578338 | 1392926 | 1000000 |
-| gorouter | 71930586 | 52163613 | 27706906 | 16627858 |
-| ozzorouting | 47753750 | 45524383 | 35422566 | 27887978 |
-| techbook13-sample | 10074039 | 7664803 | 3122547 | 1641374 |
+|       time        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| ----------------- | ------------------ | --------------- | --------------- | ---------------- |
+| servemux          | 32706376           | 31260028        | 15832058        | 7264929          |
+| goblin            | 76439406           | 40379964        | 9580180         | 4323399          |
+| httprouter        | 144948184          | 134442093       | 129799516       | 100000000        |
+| chi               | 8070156            | 8052058         | 8008406         | 8048611          |
+| gin               | 44602617           | 44147605        | 42466225        | 41878116         |
+| bunrouter         | 122551147          | 83394621        | 80952087        | 75950764         |
+| httptreemux       | 8886540            | 8690398         | 6828529         | 5250801          |
+| beegomux          | 31958985           | 25187836        | 8400084         | 4969017          |
+| gorillamux        | 3404859            | 3336543         | 3059030         | 2562878          |
+| bon               | 100000000          | 100000000       | 100000000       | 100000000        |
+| denco             | 133318143          | 134562303       | 133360999       | 134754518        |
+| echo              | 64878891           | 59950042        | 39227169        | 23970236         |
+| gocraftweb        | 1608999            | 1608612         | 1421674         | 1213682          |
+| gorouter          | 71320846           | 56132800        | 29620791        | 18047248         |
+| ozzorouting       | 47726209           | 46019254        | 35856304        | 28017253         |
+| techbook13-sample | 11669716           | 8451075         | 3286712         | 1664376          |
 
 ![time.png](/images/static-routes/time.png)
 
 [Graph - time](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=800028423&format=interactive)
 
 ### nsop
-| nsop | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
-| --- | --- | --- | --- | --- |
-| servemux | 36.33 | 37.56 | 75.73 | 148 |
-| goblin | 23.33 | 33.99 | 135 | 290.5 |
-| httprouter | 8.646 | 8.909 | 9.254 | 10.77 |
-| chi | 166.5 | 163 | 166.4 | 174.8 |
-| gin | 28.58 | 28.73 | 29.05 | 29.96 |
-| bunrouter | 11.9 | 17.02 | 17.63 | 18.62 |
-| httptreemux | 149.5 | 154 | 192.6 | 242.9 |
-| beegomux | 37.85 | 46.46 | 138.2 | 238.5 |
-| gorillamux | 381.9 | 386.4 | 419.6 | 489.2 |
-| bon | 10.51 | 10.63 | 10.71 | 10.47 |
-| denco | 8.91 | 8.916 | 9.011 | 9.005 |
-| echo | 18.73 | 19.92 | 30.15 | 50.25 |
-| gocraftweb | 749.8 | 768.7 | 862.6 | 1007 |
-| gorouter | 16.65 | 24 | 45.26 | 71.23 |
-| ozzorouting | 24.97 | 26.07 | 33.39 | 43.09 |
-| techbook13-sample | 119.1 | 157.9 | 385 | 728.6 |
+|       nsop        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| ----------------- | ------------------ | --------------- | --------------- | ---------------- |
+| servemux          | 37.13              | 38.26           | 75.65           | 148.7            |
+| goblin            | 15.66              | 29.72           | 125.2           | 277.2            |
+| httprouter        | 8.288              | 8.987           | 9.248           | 10.22            |
+| chi               | 148.7              | 148.2           | 148.6           | 148.3            |
+| gin               | 26.91              | 27.15           | 28.24           | 28.71            |
+| bunrouter         | 9.844              | 14.36           | 14.85           | 15.8             |
+| httptreemux       | 133.7              | 138.4           | 176.3           | 229.9            |
+| beegomux          | 37.7               | 47.5            | 143.3           | 241.6            |
+| gorillamux        | 352.3              | 358.8           | 393.1           | 469.6            |
+| bon               | 10.6               | 10.62           | 10.57           | 10.52            |
+| denco             | 8.944              | 9.059           | 8.999           | 8.963            |
+| echo              | 18.51              | 20.12           | 30.67           | 50.5             |
+| gocraftweb        | 743.6              | 744             | 849.2           | 986.7            |
+| gorouter          | 16.54              | 21.49           | 40.53           | 66.6             |
+| ozzorouting       | 25.36              | 26.12           | 33.56           | 42.92            |
+| techbook13-sample | 100.3              | 140.5           | 365.4           | 723              |
 
 ![nsop.png](/images/static-routes/nsop.png)
 
 [Graph - nsop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1691114342&format=interactive)
 
 ### bop
-| bop | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
-| --- | --- | --- | --- | --- |
-| servemux | 0 | 0 | 0 | 0 |
-| goblin | 0 | 0 | 0 | 0 |
-| httprouter | 0 | 0 | 0 | 0 |
-| chi | 304 | 304 | 304 | 304 |
-| gin | 0 | 0 | 0 | 0 |
-| bunrouter | 0 | 0 | 0 | 0 |
-| httptreemux | 328 | 328 | 328 | 328 |
-| beegomux | 32 | 32 | 32 | 32 |
-| gorillamux | 720 | 720 | 720 | 720 |
-| bon | 0 | 0 | 0 | 0 |
-| denco | 0 | 0 | 0 | 0 |
-| echo | 0 | 0 | 0 | 0 |
-| gocraftweb | 288 | 288 | 352 | 432 |
-| gorouter | 0 | 0 | 0 | 0 |
-| ozzorouting | 0 | 0 | 0 | 0 |
-| techbook13-sample | 304 | 308 | 432 | 872 |
+|        bop        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| ----------------- | ------------------ | --------------- | --------------- | ---------------- |
+| servemux          | 0                  | 0               | 0               | 0                |
+| goblin            | 0                  | 0               | 0               | 0                |
+| httprouter        | 0                  | 0               | 0               | 0                |
+| chi               | 304                | 304             | 304             | 304              |
+| gin               | 0                  | 0               | 0               | 0                |
+| bunrouter         | 0                  | 0               | 0               | 0                |
+| httptreemux       | 328                | 328             | 328             | 328              |
+| beegomux          | 32                 | 32              | 32              | 32               |
+| gorillamux        | 720                | 720             | 720             | 720              |
+| bon               | 0                  | 0               | 0               | 0                |
+| denco             | 0                  | 0               | 0               | 0                |
+| echo              | 0                  | 0               | 0               | 0                |
+| gocraftweb        | 288                | 288             | 352             | 432              |
+| gorouter          | 0                  | 0               | 0               | 0                |
+| ozzorouting       | 0                  | 0               | 0               | 0                |
+| techbook13-sample | 304                | 308             | 432             | 872              |
 
 ![bop.png](/images/static-routes/bop.png)
 
 [Graph - bop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=675738282&format=interactive)
 
 ### allocs
-| allocs | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
-| --- | --- | --- | --- | --- |
-| servemux | 0 | 0 | 0 | 0 |
-| goblin | 0 | 0 | 0 | 0 |
-| httprouter | 0 | 0 | 0 | 0 |
-| chi | 2 | 2 | 2 | 2 |
-| gin | 0 | 0 | 0 | 0 |
-| bunrouter | 0 | 0 | 0 | 0 |
-| httptreemux | 3 | 3 | 3 | 3 |
-| beegomux | 1 | 1 | 1 | 1 |
-| gorillamux | 7 | 7 | 7 | 7 |
-| bon | 0 | 0 | 0 | 0 |
-| denco | 0 | 0 | 0 | 0 |
-| echo | 0 | 0 | 0 | 0 |
-| gocraftweb | 6 | 6 | 6 | 6 |
-| gorouter | 0 | 0 | 0 | 0 |
-| ozzorouting | 0 | 0 | 0 | 0 |
-| techbook13-sample | 2 | 3 | 11 | 21 |
+|      allocs       | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| ----------------- | ------------------ | --------------- | --------------- | ---------------- |
+| servemux          | 0                  | 0               | 0               | 0                |
+| goblin            | 0                  | 0               | 0               | 0                |
+| httprouter        | 0                  | 0               | 0               | 0                |
+| chi               | 2                  | 2               | 2               | 2                |
+| gin               | 0                  | 0               | 0               | 0                |
+| bunrouter         | 0                  | 0               | 0               | 0                |
+| httptreemux       | 3                  | 3               | 3               | 3                |
+| beegomux          | 1                  | 1               | 1               | 1                |
+| gorillamux        | 7                  | 7               | 7               | 7                |
+| bon               | 0                  | 0               | 0               | 0                |
+| denco             | 0                  | 0               | 0               | 0                |
+| echo              | 0                  | 0               | 0               | 0                |
+| gocraftweb        | 6                  | 6               | 6               | 6                |
+| gorouter          | 0                  | 0               | 0               | 0                |
+| ozzorouting       | 0                  | 0               | 0               | 0                |
+| techbook13-sample | 2                  | 3               | 11              | 21               |
 
 ![allocs.png](/images/static-routes/allocs.png)
 
@@ -202,69 +230,69 @@ Benchmark system
 
 ## Pathparams routes
 ### time
-| time | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
-| --- | --- | --- | --- |
-| goblin | 4575871 | 2049280 | 1160929 |
-| httprouter | 34437032 | 13029846 | 8165713 |
-| chi | 5880913 | 3872946 | 2636372 |
-| gin | 36084889 | 19343385 | 12088365 |
-| bunrouter | 45573008 | 10754092 | 5223387 |
-| httptreemux | 3641581 | 2070312 | 1000000 |
-| beegomux | 4127463 | 2739680 | 1373012 |
-| gorillamux | 2109531 | 1000000 | 497953 |
-| bon | 8041033 | 5534796 | 4008288 |
-| denco | 26334654 | 9830152 | 6212643 |
-| echo | 44213551 | 15313064 | 8329726 |
-| gocraftweb | 1291144 | 970765 | 708202 |
-| gorouter | 6460888 | 4317782 | 3121602 |
-| ozzorouting | 36781983 | 16313232 | 9731100 |
-| techbook13-sample | 3656685 | 1000000 | 634324 |
+|       time        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| ----------------- | ------------------ | ------------------ | ------------------- |
+| goblin            | 5651378            | 3350758            | 2237424             |
+| httprouter        | 35218974           | 13397467           | 8215023             |
+| chi               | 7278495            | 4290862            | 2868873             |
+| gin               | 37004343           | 19501255           | 12229501            |
+| bunrouter         | 62347647           | 10800812           | 5265159             |
+| httptreemux       | 4364602            | 2175886            | 1000000             |
+| beegomux          | 4552228            | 2861100            | 1420195             |
+| gorillamux        | 2252773            | 1000000            | 513360              |
+| bon               | 9118044            | 6031597            | 4243491             |
+| denco             | 25824546           | 10170320           | 6332478             |
+| echo              | 45946130           | 15379792           | 8352284             |
+| gocraftweb        | 1315434            | 969732             | 693129              |
+| gorouter          | 7179020            | 4748841            | 3296766             |
+| ozzorouting       | 37090459           | 16726933           | 10019931            |
+| techbook13-sample | 3875658            | 1223982            | 651006              |
 
 ![time.png](/images/pathparam-routes/time.png)
 
 [Graph - time](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1039813866&format=interactive)
 
 ### nsop
-| nsop | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
-| --- | --- | --- | --- |
-| goblin | 251.9 | 574 | 1013 |
-| httprouter | 41.44 | 92.52 | 146.3 |
-| chi | 200.8 | 309.1 | 455.1 |
-| gin | 33.9 | 62.48 | 98.31 |
-| bunrouter | 23.22 | 112.8 | 229.8 |
-| httptreemux | 297.5 | 581.1 | 1160 |
-| beegomux | 272.1 | 435.6 | 872.2 |
-| gorillamux | 558.9 | 1127 | 2367 |
-| bon | 154.5 | 217.1 | 300.1 |
-| denco | 46.57 | 122.7 | 193.3 |
-| echo | 26.49 | 78.45 | 144 |
-| gocraftweb | 927.4 | 1232 | 1770 |
-| gorouter | 188.4 | 278.1 | 382.5 |
-| ozzorouting | 33.78 | 73.6 | 123.4 |
-| techbook13-sample | 326.2 | 1008 | 1841 |
+|       nsop        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| ----------------- | ------------------ | ------------------ | ------------------- |
+| goblin            | 194                | 341.2              | 529.2               |
+| httprouter        | 33.85              | 89.47              | 146.9               |
+| chi               | 164.3              | 280.9              | 421.4               |
+| gin               | 32.5               | 60.58              | 97.68               |
+| bunrouter         | 19.26              | 110.7              | 228.4               |
+| httptreemux       | 276.8              | 553.1              | 1111                |
+| beegomux          | 262.1              | 420.6              | 845                 |
+| gorillamux        | 530.7              | 1092               | 2320                |
+| bon               | 131.9              | 198.9              | 281.8               |
+| denco             | 46.26              | 118.3              | 189.8               |
+| echo              | 26.14              | 78.09              | 143.7               |
+| gocraftweb        | 914.5              | 1196               | 1694                |
+| gorouter          | 168.9              | 253.2              | 362.9               |
+| ozzorouting       | 32.27              | 71.76              | 119.8               |
+| techbook13-sample | 308.6              | 982.1              | 1794                |
 
 ![nsop.png](/images/pathparam-routes/nsop.png)
 
 [Graph - nsop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1534246873&format=interactive)
 
 ### bop
-| bop | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
-| --- | --- | --- | --- |
-| goblin | 328 | 412 | 494 |
-| httprouter | 32 | 160 | 320 |
-| chi | 304 | 304 | 304 |
-| gin | 0 | 0 | 0 |
-| bunrouter | 0 | 0 | 0 |
-| httptreemux | 680 | 904 | 1742 |
-| beegomux | 672 | 672 | 1254 |
-| gorillamux | 1024 | 1088 | 1751 |
-| bon | 304 | 304 | 304 |
-| denco | 32 | 160 | 320 |
-| echo | 0 | 0 | 0 |
-| gocraftweb | 656 | 944 | 1862 |
-| gorouter | 360 | 488 | 648 |
-| ozzorouting | 0 | 0 | 0 |
-| techbook13-sample | 432 | 968 | 1792 |
+|        bop        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| ----------------- | ------------------ | ------------------ | ------------------- |
+| goblin            | 328                | 328                | 328                 |
+| httprouter        | 32                 | 160                | 320                 |
+| chi               | 304                | 304                | 304                 |
+| gin               | 0                  | 0                  | 0                   |
+| bunrouter         | 0                  | 0                  | 0                   |
+| httptreemux       | 680                | 904                | 1742                |
+| beegomux          | 672                | 672                | 1254                |
+| gorillamux        | 1024               | 1088               | 1751                |
+| bon               | 304                | 304                | 304                 |
+| denco             | 32                 | 160                | 320                 |
+| echo              | 0                  | 0                  | 0                   |
+| gocraftweb        | 656                | 944                | 1862                |
+| gorouter          | 360                | 488                | 648                 |
+| ozzorouting       | 0                  | 0                  | 0                   |
+| techbook13-sample | 432                | 968                | 1792                |
 
 ![bop.png](/images/pathparam-routes/bop.png)
 
@@ -325,9 +353,36 @@ Reporting of benchmark runs is done by the owner, so you do not need to update t
 
 If you have any questions, you can ask them in Issue.
 
+# Contribution
+Issues and Pull Requests are always welcome.
+
+We would be happy to receive your contributions.
+
+Please review the following documents before making a contribution.
+
+[CODE_OF_CONDUCT](https://github.com/bmf-san/go-router-benchmark/blob/master/.github/CODE_OF_CONDUCT.md)
+[CONTRIBUTING](https://github.com/bmf-san/go-router-benchmark/blob/master/.github/CONTRIBUTING.md)
+
+# Sponsor
+If you like it, I would be happy to have you sponsor it!
+
+[GitHub Sponsors - bmf-san](https://github.com/sponsors/bmf-san)
+
+Or I would be happy to get a STAR.
+
+It motivates me to keep up with ongoing maintenance :D
+
 # License
-This project is licensed under the terms of the MIT license.
+Based on the MIT License.
+
+[LICENSE](https://github.com/bmf-san/goblin/blob/master/LICENSE)
 
 ## Author
-- [@bmf-san](https://twitter.com/bmf_san)
-- [bmf-tech.com](http://bmf-tech.com/)
+[bmf-san](https://github.com/bmf-san)
+
+- Email
+  - bmf.infomation@gmail.com
+- Blog
+  - [bmf-tech.com](http://bmf-tech.com)
+- Twitter
+  - [bmf-san](https://twitter.com/bmf-san)

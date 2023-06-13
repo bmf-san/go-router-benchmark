@@ -13,7 +13,7 @@ jobs:
         default: true
     docker:
       - image: "cimg/go:<< parameters.version >>"
-    working_directory: ~/go/src/github.com/bmf-san/goblin
+    working_directory: ~/go/src/github.com/bmf-san/go-router-benchmark
     environment:
       GO111MODULE: "on"
     steps:
@@ -31,24 +31,19 @@ jobs:
           name: "Run vet"
           command: make vet
       - run:
+          name: "Install tools"
+          command: make install-tools
+      - run:
+          name: "Run go staticcheck"
+          command: make staticcheck
+      - run:
           name: "Run go test-benchmark"
           command: make test-benchmark
-      - when:
-          condition:
-            or:
-              - equal: [ '1.19', << parameters.version >> ]
-              - equal: [ '1.18', << parameters.version >> ]
-          steps:
-            - run:
-                name: "Install tools"
-                command: make install-tools
-            - run:
-                name: "Run go staticcheck"
-                command: make staticcheck
+
 workflows:
   tests:
     jobs:
       - test:
           matrix:
             parameters:
-              version: ["1.19", "1.18", "1.17"]
+              version: ["1.20", "1.19"]
