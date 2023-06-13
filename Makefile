@@ -30,6 +30,10 @@ vet: ## Run vet.
 staticcheck: ## Run staticcheck.
 	staticcheck ./...
 
+.PHONY: update-all-mod
+update-all-mod: ## Run go get and mod.
+	go get -u && go mod tidy && go get -u ./...
+
 .PHONY: test-benchmark
 test-benchmark: ## Run benchmark tests.
 	go test -bench=. -benchmem
