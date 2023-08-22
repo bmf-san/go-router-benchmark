@@ -14,3 +14,4 @@ BenchmarkStaticRoutes10GocraftWeb-8,432
 BenchmarkStaticRoutes10Gorouter-8,0
 BenchmarkStaticRoutes10OzzoRouting-8,0
 BenchmarkStaticRoutes10N9tE9Routing-8,872
+BenchmarkStaticRoutes10MuxPatterns-8,0

@@ -13,3 +13,4 @@ BenchmarkPathParamRoutes10ColonGocraftWeb-8,1862
 BenchmarkPathParamRoutes10BracketGorouter-8,648
 BenchmarkPathParamRoutes10InequalitySignOzzoRouting-8,0
 BenchmarkPathParamRoutes10ColonN9tE9Routing-8,1792
+BenchmarkPathParamRoutes10BracketMuxPatterns-8,496
