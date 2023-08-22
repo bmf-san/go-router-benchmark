@@ -605,3 +605,40 @@ func BenchmarkPathParamRoutes10ColonN9tE9Routing(b *testing.B) {
 	router := loadN9tE9Routing(pathParamRoutes10Colon)
 	benchmark(b, pathParamRoutes10Colon, router)
 }
+
+// muxpatterns
+// https://github.com/jba/muxpatterns
+func BenchmarkStaticRoutesRootMuxPatterns(b *testing.B) {
+	router := loadMuxPatterns(staticRoutesRoot)
+	benchmark(b, staticRoutesRoot, router)
+}
+
+func BenchmarkStaticRoutes1OMuxPatterns(b *testing.B) {
+	router := loadMuxPatterns(staticRoutes1)
+	benchmark(b, staticRoutes1, router)
+}
+
+func BenchmarkStaticRoutes5OMuxPatterns(b *testing.B) {
+	router := loadMuxPatterns(staticRoutes5)
+	benchmark(b, staticRoutes5, router)
+}
+
+func BenchmarkStaticRoutes10MuxPatterns(b *testing.B) {
+	router := loadMuxPatterns(staticRoutes10)
+	benchmark(b, staticRoutes10, router)
+}
+
+func BenchmarkPathParamRoutes1BracketMuxPatterns(b *testing.B) {
+	router := loadMuxPatterns(pathParamRoutes1Bracket)
+	benchmark(b, pathParamRoutes1Bracket, router)
+}
+
+func BenchmarkPathParamRoutes5BracketMuxPatterns(b *testing.B) {
+	router := loadMuxPatterns(pathParamRoutes5Bracket)
+	benchmark(b, pathParamRoutes5Bracket, router)
+}
+
+func BenchmarkPathParamRoutes10BracketMuxPatterns(b *testing.B) {
+	router := loadMuxPatterns(pathParamRoutes10Bracket)
+	benchmark(b, pathParamRoutes10Bracket, router)
+}

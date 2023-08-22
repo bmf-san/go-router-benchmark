@@ -11,6 +11,7 @@ import (
 	ozzorouting "github.com/go-ozzo/ozzo-routing/v2"
 	"github.com/gocraft/web"
 	gorillamux "github.com/gorilla/mux"
+	"github.com/jba/muxpatterns"
 	"github.com/julienschmidt/httprouter"
 	"github.com/labstack/echo"
 	"github.com/lkeix/techbook13-sample/router"
@@ -146,5 +147,12 @@ func loadN9tE9Routing(r route) http.Handler {
 	router := router.NewRouter()
 	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
 	router.Insert(r.path, handler)
+	return router
+}
+
+func loadMuxPatterns(r route) http.Handler {
+	router := muxpatterns.NewServeMux()
+	handler := http.HandlerFunc(func(_ http.ResponseWriter, _ *http.Request) {})
+	router.Handle(r.path, handler)
 	return router
 }
