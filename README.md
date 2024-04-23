@@ -125,7 +125,7 @@ Benchmark results are published in a spreadsheet.
 [<Public>go-router-benchmark](https://docs.google.com/spreadsheets/d/1DrDNGJXfquw_PED3-eMqWqh7qbCTVBWZtqaKPXtngxg/edit#gid=1913830192)
 
 Benchmark system
-- go version: go1.19
+- go version: go1.22
 - goos: darwin
 - goarch: amd64
 - pkg: github.com/go-router-benchmark
