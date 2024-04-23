@@ -51,6 +51,21 @@ func BenchmarkStaticRoutes10ServeMux(b *testing.B) {
 	benchmark(b, staticRoutes10, router)
 }
 
+func BenchmarkPathParamRoutes1BracketServeMux(b *testing.B) {
+	router := loadServeMux(pathParamRoutes1Bracket)
+	benchmark(b, pathParamRoutes1Bracket, router)
+}
+
+func BenchmarkPathParamRoutes5BracketServeMux(b *testing.B) {
+	router := loadServeMux(pathParamRoutes5Bracket)
+	benchmark(b, pathParamRoutes5Bracket, router)
+}
+
+func BenchmarkPathParamRoutes10BracketServeMux(b *testing.B) {
+	router := loadServeMux(pathParamRoutes10Bracket)
+	benchmark(b, pathParamRoutes10Bracket, router)
+}
+
 // bmf-san/goblin
 // https://github.com/bmf-san/goblin
 func BenchmarkStaticRoutesRootGoblin(b *testing.B) {

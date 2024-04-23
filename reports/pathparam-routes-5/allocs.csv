@@ -1,6 +1,7 @@
+BenchmarkPathParamRoutes5BracketServeMux-8,4
 BenchmarkPathParamRoutes5ColonGoblin-8,3
 BenchmarkPathParamRoutes5ColonHTTPRouter-8,1
-BenchmarkPathParamRoutes5BracketChi-8,2
+BenchmarkPathParamRoutes5BracketChi-8,4
 BenchmarkPathParamRoutes5ColonGin-8,0
 BenchmarkPathParamRoutes5ColonBunRouter-8,0
 BenchmarkPathParamRoutes5ColonHTTPTreeMux-8,9
