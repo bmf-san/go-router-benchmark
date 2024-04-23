@@ -133,79 +133,79 @@ Benchmark system
 
 ## Static routes
 ### time
-|       time        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| time              | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
 | ----------------- | ------------------ | --------------- | --------------- | ---------------- |
-| servemux          | 32706376           | 31260028        | 15832058        | 7264929          |
-| goblin            | 76439406           | 40379964        | 9580180         | 4323399          |
-| httprouter        | 144948184          | 134442093       | 129799516       | 100000000        |
-| chi               | 8070156            | 8052058         | 8008406         | 8048611          |
-| gin               | 44602617           | 44147605        | 42466225        | 41878116         |
-| bunrouter         | 122551147          | 83394621        | 80952087        | 75950764         |
-| httptreemux       | 8886540            | 8690398         | 6828529         | 5250801          |
-| beegomux          | 31958985           | 25187836        | 8400084         | 4969017          |
-| gorillamux        | 3404859            | 3336543         | 3059030         | 2562878          |
-| bon               | 100000000          | 100000000       | 100000000       | 100000000        |
-| denco             | 133318143          | 134562303       | 133360999       | 134754518        |
-| echo              | 64878891           | 59950042        | 39227169        | 23970236         |
-| gocraftweb        | 1608999            | 1608612         | 1421674         | 1213682          |
-| gorouter          | 71320846           | 56132800        | 29620791        | 18047248         |
-| ozzorouting       | 47726209           | 46019254        | 35856304        | 28017253         |
-| techbook13-sample | 11669716           | 8451075         | 3286712         | 1664376          |
+| servemux          | 27831720           | 19891950        | 4838466         | 2508039          |
+| goblin            | 78151288           | 39773182        | 10053289        | 4709226          |
+| httprouter        | 144303050          | 134171820       | 129710535       | 100000000        |
+| chi               | 7614604            | 7730403         | 7558288         | 6086882          |
+| gin               | 44050909           | 43401141        | 43176404        | 41443738         |
+| bunrouter         | 100000000          | 79699796        | 76368669        | 71506602         |
+| httptreemux       | 8800170            | 8486769         | 6520071         | 4769065          |
+| beegomux          | 31233393           | 26120126        | 8418674         | 4674050          |
+| gorillamux        | 3210363            | 3138418         | 2914868         | 2262861          |
+| bon               | 100000000          | 100000000       | 100000000       | 97284812         |
+| denco             | 134409880          | 134490919       | 133387552       | 131848746        |
+| echo              | 65374460           | 60613204        | 39926578        | 23414919         |
+| gocraftweb        | 1686422            | 1644936         | 1460192         | 1208860          |
+| gorouter          | 89735841           | 64869247        | 31833826        | 18472964         |
+| ozzorouting       | 47574130           | 45542164        | 35507553        | 27385978         |
+| techbook13-sample | 10733499           | 7743865         | 3166988         | 1523804          |
 
 ![time.png](/images/static-routes/time.png)
 
 [Graph - time](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=800028423&format=interactive)
 
 ### nsop
-|       nsop        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| nsop              | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
 | ----------------- | ------------------ | --------------- | --------------- | ---------------- |
-| servemux          | 37.13              | 38.26           | 75.65           | 148.7            |
-| goblin            | 15.66              | 29.72           | 125.2           | 277.2            |
-| httprouter        | 8.288              | 8.987           | 9.248           | 10.22            |
-| chi               | 148.7              | 148.2           | 148.6           | 148.3            |
-| gin               | 26.91              | 27.15           | 28.24           | 28.71            |
-| bunrouter         | 9.844              | 14.36           | 14.85           | 15.8             |
-| httptreemux       | 133.7              | 138.4           | 176.3           | 229.9            |
-| beegomux          | 37.7               | 47.5            | 143.3           | 241.6            |
-| gorillamux        | 352.3              | 358.8           | 393.1           | 469.6            |
-| bon               | 10.6               | 10.62           | 10.57           | 10.52            |
-| denco             | 8.944              | 9.059           | 8.999           | 8.963            |
-| echo              | 18.51              | 20.12           | 30.67           | 50.5             |
-| gocraftweb        | 743.6              | 744             | 849.2           | 986.7            |
-| gorouter          | 16.54              | 21.49           | 40.53           | 66.6             |
-| ozzorouting       | 25.36              | 26.12           | 33.56           | 42.92            |
-| techbook13-sample | 100.3              | 140.5           | 365.4           | 723              |
+| servemux          | 43.09              | 60.18           | 226.1           | 457.7            |
+| goblin            | 15.34              | 30.23           | 119.7           | 265.5            |
+| httprouter        | 8.328              | 8.931           | 9.291           | 10.58            |
+| chi               | 160                | 159.4           | 159.5           | 183.6            |
+| gin               | 27.66              | 27.68           | 27.81           | 29.56            |
+| bunrouter         | 10.63              | 15.24           | 15.72           | 18.61            |
+| httptreemux       | 137.1              | 140.7           | 183.2           | 270.6            |
+| beegomux          | 38.22              | 46.08           | 143.6           | 251.2            |
+| gorillamux        | 374.9              | 380.8           | 411.7           | 550.8            |
+| bon               | 10.68              | 10.46           | 10.7            | 10.93            |
+| denco             | 9.027              | 8.986           | 8.962           | 9.076            |
+| echo              | 18.54              | 19.73           | 30.14           | 50.64            |
+| gocraftweb        | 709.5              | 718             | 826             | 1024             |
+| gorouter          | 13.7               | 18.46           | 37.49           | 71.49            |
+| ozzorouting       | 25.4               | 26.31           | 33.01           | 43.9             |
+| techbook13-sample | 115.3              | 154.8           | 379.8           | 779.6            |
 
 ![nsop.png](/images/static-routes/nsop.png)
 
 [Graph - nsop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1691114342&format=interactive)
 
 ### bop
-|        bop        | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| bop               | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
 | ----------------- | ------------------ | --------------- | --------------- | ---------------- |
 | servemux          | 0                  | 0               | 0               | 0                |
 | goblin            | 0                  | 0               | 0               | 0                |
 | httprouter        | 0                  | 0               | 0               | 0                |
-| chi               | 304                | 304             | 304             | 304              |
+| chi               | 336                | 336             | 336             | 336              |
 | gin               | 0                  | 0               | 0               | 0                |
 | bunrouter         | 0                  | 0               | 0               | 0                |
-| httptreemux       | 328                | 328             | 328             | 328              |
+| httptreemux       | 360                | 360             | 360             | 360              |
 | beegomux          | 32                 | 32              | 32              | 32               |
-| gorillamux        | 720                | 720             | 720             | 720              |
+| gorillamux        | 784                | 784             | 784             | 784              |
 | bon               | 0                  | 0               | 0               | 0                |
 | denco             | 0                  | 0               | 0               | 0                |
 | echo              | 0                  | 0               | 0               | 0                |
 | gocraftweb        | 288                | 288             | 352             | 432              |
 | gorouter          | 0                  | 0               | 0               | 0                |
 | ozzorouting       | 0                  | 0               | 0               | 0                |
-| techbook13-sample | 304                | 308             | 432             | 872              |
+| techbook13-sample | 336                | 340             | 464             | 904              |
 
 ![bop.png](/images/static-routes/bop.png)
 
 [Graph - bop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=675738282&format=interactive)
 
 ### allocs
-|      allocs       | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
+| allocs            | static-routes-root | static-routes-1 | static-routes-5 | static-routes-10 |
 | ----------------- | ------------------ | --------------- | --------------- | ---------------- |
 | servemux          | 0                  | 0               | 0               | 0                |
 | goblin            | 0                  | 0               | 0               | 0                |
@@ -230,80 +230,84 @@ Benchmark system
 
 ## Pathparams routes
 ### time
-|       time        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| time              | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
 | ----------------- | ------------------ | ------------------ | ------------------- |
-| goblin            | 5651378            | 3350758            | 2237424             |
-| httprouter        | 35218974           | 13397467           | 8215023             |
-| chi               | 7278495            | 4290862            | 2868873             |
-| gin               | 37004343           | 19501255           | 12229501            |
-| bunrouter         | 62347647           | 10800812           | 5265159             |
-| httptreemux       | 4364602            | 2175886            | 1000000             |
-| beegomux          | 4552228            | 2861100            | 1420195             |
-| gorillamux        | 2252773            | 1000000            | 513360              |
-| bon               | 9118044            | 6031597            | 4243491             |
-| denco             | 25824546           | 10170320           | 6332478             |
-| echo              | 45946130           | 15379792           | 8352284             |
-| gocraftweb        | 1315434            | 969732             | 693129              |
-| gorouter          | 7179020            | 4748841            | 3296766             |
-| ozzorouting       | 37090459           | 16726933           | 10019931            |
-| techbook13-sample | 3875658            | 1223982            | 651006              |
+| servemux          | 9879615            | 3095632            | 1716556             |
+| goblin            | 5543427            | 3288781            | 2148358             |
+| httprouter        | 33200109           | 12520192           | 7242321             |
+| chi               | 4124253            | 2560972            | 1262286             |
+| gin               | 35934104           | 18361316           | 10710009            |
+| bunrouter         | 59392094           | 10587997           | 5214822             |
+| httptreemux       | 3764035            | 2022978            | 1000000             |
+| beegomux          | 3953678            | 2586265            | 1457932             |
+| gorillamux        | 2004242            | 961486             | 521152              |
+| bon               | 7565557            | 5322081            | 4093870             |
+| denco             | 24679846           | 9708924            | 6409720             |
+| echo              | 46360610           | 15237498           | 8387311             |
+| gocraftweb        | 1287634            | 960009             | 717404              |
+| gorouter          | 6209989            | 4295180            | 3322506             |
+| ozzorouting       | 35132318           | 15635671           | 9333058             |
+| techbook13-sample | 3436351            | 1000000            | 647994              |
 
 ![time.png](/images/pathparam-routes/time.png)
 
 [Graph - time](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1039813866&format=interactive)
 
 ### nsop
-|       nsop        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| nsop              | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
 | ----------------- | ------------------ | ------------------ | ------------------- |
-| goblin            | 194                | 341.2              | 529.2               |
-| httprouter        | 33.85              | 89.47              | 146.9               |
-| chi               | 164.3              | 280.9              | 421.4               |
-| gin               | 32.5               | 60.58              | 97.68               |
-| bunrouter         | 19.26              | 110.7              | 228.4               |
-| httptreemux       | 276.8              | 553.1              | 1111                |
-| beegomux          | 262.1              | 420.6              | 845                 |
-| gorillamux        | 530.7              | 1092               | 2320                |
-| bon               | 131.9              | 198.9              | 281.8               |
-| denco             | 46.26              | 118.3              | 189.8               |
-| echo              | 26.14              | 78.09              | 143.7               |
-| gocraftweb        | 914.5              | 1196               | 1694                |
-| gorouter          | 168.9              | 253.2              | 362.9               |
-| ozzorouting       | 32.27              | 71.76              | 119.8               |
-| techbook13-sample | 308.6              | 982.1              | 1794                |
+| servemux          | 120.8              | 383.8              | 697.1               |
+| goblin            | 217.7              | 367.2              | 558                 |
+| httprouter        | 36.3               | 96.27              | 155.5               |
+| chi               | 304.8              | 468.1              | 961.9               |
+| gin               | 33.44              | 64.27              | 104.1               |
+| bunrouter         | 20.3               | 115.1              | 229.9               |
+| httptreemux       | 316.6              | 599                | 1080                |
+| beegomux          | 316.7              | 466.9              | 826                 |
+| gorillamux        | 609.5              | 1215               | 2327                |
+| bon               | 159.2              | 226.9              | 293.9               |
+| denco             | 49.59              | 123.2              | 187                 |
+| echo              | 26.17              | 78.84              | 143.4               |
+| gocraftweb        | 936.6              | 1228               | 1654                |
+| gorouter          | 196.1              | 277.9              | 364.7               |
+| ozzorouting       | 33.99              | 77.03              | 129                 |
+| techbook13-sample | 355.3              | 1045               | 1813                |
 
 ![nsop.png](/images/pathparam-routes/nsop.png)
 
 [Graph - nsop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=1534246873&format=interactive)
 
 ### bop
-|        bop        | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| bop               | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
 | ----------------- | ------------------ | ------------------ | ------------------- |
-| goblin            | 328                | 328                | 328                 |
+| servemux          | 16                 | 240                | 496                 |
+| goblin            | 360                | 360                | 360                 |
 | httprouter        | 32                 | 160                | 320                 |
-| chi               | 304                | 304                | 304                 |
+| chi               | 672                | 672                | 1254                |
 | gin               | 0                  | 0                  | 0                   |
 | bunrouter         | 0                  | 0                  | 0                   |
-| httptreemux       | 680                | 904                | 1742                |
-| beegomux          | 672                | 672                | 1254                |
-| gorillamux        | 1024               | 1088               | 1751                |
-| bon               | 304                | 304                | 304                 |
+| httptreemux       | 712                | 936                | 1774                |
+| beegomux          | 704                | 704                | 1286                |
+| gorillamux        | 1088               | 1152               | 1815                |
+| bon               | 336                | 336                | 336                 |
 | denco             | 32                 | 160                | 320                 |
 | echo              | 0                  | 0                  | 0                   |
 | gocraftweb        | 656                | 944                | 1862                |
-| gorouter          | 360                | 488                | 648                 |
+| gorouter          | 392                | 520                | 680                 |
 | ozzorouting       | 0                  | 0                  | 0                   |
-| techbook13-sample | 432                | 968                | 1792                |
+| techbook13-sample | 464                | 1000               | 1824                |
 
 ![bop.png](/images/pathparam-routes/bop.png)
 
 [Graph - bop](https://docs.google.com/spreadsheets/d/e/2PACX-1vRiWBjJim4v_XyoN45s4VVQXD-PIBHKjyVfOv5OX37376SZ9GvL5bmqQegLl-5arBpD-3hhTKTEgkIj/pubchart?oid=73824357&format=interactive)
 
 ### allocs
-|      allocs       | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
+| allocs            | pathparam-routes-1 | pathparam-routes-5 | pathparam-routes-10 |
 | ----------------- | ------------------ | ------------------ | ------------------- |
+| servemux          | 1                  | 4                  | 5                   |
 | goblin            | 3                  | 3                  | 3                   |
 | httprouter        | 1                  | 1                  | 1                   |
-| chi               | 2                  | 2                  | 2                   |
+| chi               | 4                  | 4                  | 5                   |
 | gin               | 0                  | 0                  | 0                   |
 | bunrouter         | 0                  | 0                  | 0                   |
 | httptreemux       | 6                  | 9                  | 11                  |
