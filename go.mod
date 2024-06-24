@@ -7,7 +7,7 @@ require (
 	github.com/bmf-san/goblin v0.0.0-20231001152959-ea7a860c6b0c
 	github.com/dimfeld/httptreemux/v5 v5.5.0
 	github.com/gin-gonic/gin v1.9.1
-	github.com/go-chi/chi/v5 v5.0.12
+	github.com/go-chi/chi/v5 v5.0.14
 	github.com/go-ozzo/ozzo-routing/v2 v2.4.0
 	github.com/gocraft/web v0.0.0-20190207150652-9707327fb69b
 	github.com/gorilla/mux v1.8.1
